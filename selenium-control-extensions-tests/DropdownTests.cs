@@ -1,31 +1,22 @@
 using FluentAssertions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace selenium_control_extensions_tests
 {
     [TestClass]
-    public class DropdownTests
+    public class DropdownTests : TestBase
     {
-        private ChromeDriver _driver;
         private Dropdown _ce;
         private readonly string[] _options = new[] { "Option A", "Option B", "Option C" };
 
         [TestInitialize]
-        public void Setup()
+        public void SetupTest()
         {
-            _driver = new ChromeDriver();
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            _driver.Manage().Window.Maximize();
-            _driver.Navigate().GoToUrl("http://localhost:53433/controls/dropdown");
-            var element = _driver.FindElement(By.CssSelector("#dropdown"));
-            _ce = new Dropdown(element);
-        }
+            Setup();
 
-        [TestCleanup]
-        public void Cleanup()
-        {
-            _driver?.Quit();
+            Driver.Navigate().GoToUrl("http://localhost:53433/controls/dropdown");
+            var element = Driver.FindElement(By.CssSelector("#dropdown"));
+            _ce = new Dropdown(element);
         }
 
         [TestMethod]
