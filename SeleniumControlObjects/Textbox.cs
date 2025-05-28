@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace selenium_control_extensions_tests
+namespace SeleniumControlObjects
 {
     public class Textbox
     {

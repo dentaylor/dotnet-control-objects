@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace selenium_control_extensions_tests
+namespace SeleniumControlObjects
 {
     public class Dropdown
     {

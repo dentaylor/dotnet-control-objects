@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>selenium_control_extensions_tests</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -10,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="7.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
@@ -18,6 +16,10 @@
     <PackageReference Include="Selenium.Support" Version="4.32.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.32.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="136.0.7103.9400" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SeleniumControlObjects\SeleniumControlObjects.csproj" />
   </ItemGroup>
 
 </Project>

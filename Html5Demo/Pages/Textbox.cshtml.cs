@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UiControlsDemo.Pages.Controls
+namespace UIControlsDemo.Pages
 {
     public class TextboxModel : PageModel
     {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UIControlsDemo.Pages.Controls
+namespace UIControlsDemo.Pages
 {
     public class ButtonModel : PageModel
     {
