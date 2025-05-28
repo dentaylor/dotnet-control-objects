@@ -1,0 +1,11 @@
+﻿@page
+@model MultidropdownModel
+
+<h2>Multi Dropdown Example</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="SelectedOptions">Select multiple options:</label>
+        <select asp-for="SelectedOptions" asp-items="Model.Options" multiple class="form-control" size="5"></select>
+    </div>
+</form>

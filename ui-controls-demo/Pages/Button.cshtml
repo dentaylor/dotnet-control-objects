@@ -1,0 +1,15 @@
+﻿@page
+@model UIControlsDemo.Pages.Controls.ButtonModel
+@{
+    ViewData["Title"] = "Button";
+}
+<form method="post">
+    <button type="submit" class="btn btn-primary">Click Me</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-success mt-3">
+        @Model.Message
+    </div>
+}

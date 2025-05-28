@@ -1,0 +1,11 @@
+﻿@page
+@model TextareaModel
+
+<h2>Textarea Example</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Message">Enter your message:</label>
+        <textarea asp-for="Message" class="form-control" rows="5"></textarea>
+    </div>
+</form>

@@ -1,0 +1,18 @@
+﻿@page
+@model MeterModel
+
+<h2>Meter Example</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="valueInput">Set a value (0–100):</label>
+        <input type="number" id="valueInput" name="MeterValue" min="0" max="100" class="form-control" value="@Model.MeterValue" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Update Meter</button>
+</form>
+
+<h4 class="mt-4">Progress:</h4>
+<meter min="0" max="100" value="@Model.MeterValue" low="30" high="70" optimum="80">
+    @Model.MeterValue
+</meter>

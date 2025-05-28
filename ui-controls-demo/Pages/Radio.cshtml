@@ -1,0 +1,17 @@
+﻿@page
+@model RadioModel
+
+<h2>Radio Button Example</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label>Select an option:</label>
+        @foreach (var option in Model.Options)
+        {
+            <div class="form-check">
+                <input type="radio" class="form-check-input" asp-for="SelectedOption" value="@option.Value" id="@option.Value" />
+                <label class="form-check-label" for="@option.Value">@option.Text</label>
+            </div>
+        }
+    </div>
+</form>

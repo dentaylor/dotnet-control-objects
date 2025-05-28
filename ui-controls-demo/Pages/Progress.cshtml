@@ -1,0 +1,17 @@
+﻿@page
+@model ProgressModel
+
+<h2>Progress Example</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="progressInput">Enter a value (0–100):</label>
+        <input type="number" id="progressInput" name="ProgressValue" min="0" max="100" class="form-control" value="@Model.ProgressValue" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Update Progress</button>
+</form>
+
+<h4 class="mt-4">Progress:</h4>
+<progress value="@Model.ProgressValue" max="100"></progress>
+<span class="ml-2">@Model.ProgressValue%</span>
