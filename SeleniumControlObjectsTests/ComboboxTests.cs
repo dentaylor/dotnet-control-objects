@@ -1,40 +1,43 @@
 ﻿using OpenQA.Selenium;
-using SeleniumControlObjectsTests;
 using SeleniumControlObjects;
+using System.Threading.Tasks;
 
-[TestClass]
-public class ComboBoxTests : TestBase<ComboBox>
+namespace SeleniumControlObjectTests
 {
-    [TestInitialize]
-    public void Init()
+    [TestClass]
+    public class ComboBoxTests : TestBase<ComboBox>
     {
-        Setup("combobox-test", By.Id("fruit"));
-    }
+        [TestInitialize]
+        public void Init()
+        {
+            Setup("combobox-test", By.Id("fruit"));
+        }
 
-    [TestMethod]
-    public async Task EnterTextAsync_SetsInputValue()
-    {
-        // Arrange
-        var comboBox = ControlObject;
+        [TestMethod]
+        public async Task EnterTextAsync_SetsInputValue()
+        {
+            // Arrange
+            var comboBox = ControlObject;
 
-        // Act
-        ControlObject.Set("Banana");
-        var value = ControlObject.Selected;
+            // Act
+            ControlObject.Set("Banana");
+            var value = ControlObject.Selected;
 
-        // Assert
-        Assert.AreEqual("Banana", value, "ComboBox value should be 'Banana'.");
-    }
+            // Assert
+            Assert.AreEqual("Banana", value, "ComboBox value should be 'Banana'.");
+        }
 
-    [TestMethod]
-    public void GetValueAsync_ReturnsCurrentInputValue()
-    {
-        // Arrange
-        ControlObject.Set("Cherry");
+        [TestMethod]
+        public void GetValueAsync_ReturnsCurrentInputValue()
+        {
+            // Arrange
+            ControlObject.Set("Cherry");
 
-        // Act
-        var value = ControlObject.Selected;
+            // Act
+            var value = ControlObject.Selected;
 
-        // Assert
-        Assert.AreEqual("Cherry", value);
+            // Assert
+            Assert.AreEqual("Cherry", value);
+        }
     }
 }

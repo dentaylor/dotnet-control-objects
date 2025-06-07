@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumControlObjects;
 
-namespace SeleniumControlObjectsTests
+namespace SeleniumControlObjectTests
 {
     [TestClass]
     public class ButtonTests : TestBase<Button>

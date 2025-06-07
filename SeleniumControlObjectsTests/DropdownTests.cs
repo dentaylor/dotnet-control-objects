@@ -1,7 +1,9 @@
 using OpenQA.Selenium;
 using SeleniumControlObjects;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace SeleniumControlObjectsTests
+namespace SeleniumControlObjectTests
 {
     [TestClass]
     public class DropdownTests : TestBase<Dropdown>

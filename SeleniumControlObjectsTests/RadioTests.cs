@@ -1,56 +1,55 @@
 ﻿using OpenQA.Selenium;
-using SeleniumControlObjectsTests;
 using SeleniumControlObjects;
 
-[TestClass]
-public class RadioTests : TestBase<Radio>
+namespace SeleniumControlObjectTests
 {
-    [TestInitialize]
-    public void Init()
+    [TestClass]
+    public class RadioTests : TestBase<Radio>
     {
-        Setup("radio-test", By.Id("credit"));
-    }
+        [TestInitialize]
+        public void Init()
+        {
+            Setup("radio-test", By.Id("credit"));
+        }
 
-    [TestMethod]
-    public void Set_True_SelectsRadioButton()
-    {
-        // Arrange
-        var radio = ControlObject;
+        [TestMethod]
+        public void Set_True_SelectsRadioButton()
+        {
+            // Arrange
+            var radio = ControlObject;
 
-        // Act
-        radio.Set(true);
+            // Act
+            radio.Set(true);
 
-        // Assert
-        Assert.AreEqual("true", radio.IsSet);
-    }
+            // Assert
+            Assert.AreEqual("true", radio.IsSet);
+        }
 
-    [TestMethod]
-    public void Set_False_DoesNotDeselectRadioButton()
-    {
-        // Arrange
-        var radio = ControlObject;
-        radio.Set(true);
+        [TestMethod]
+        public void Set_False_DoesNotDeselectRadioButton()
+        {
+            // Arrange
+            var radio = ControlObject;
+            radio.Set(true);
 
-        // Act
-        radio.Set(false); // should be ignored
+            // Act
+            radio.Set(false); // should be ignored
 
-        // Assert
-        Assert.AreEqual("true", radio.IsSet);
-    }
+            // Assert
+            Assert.AreEqual("true", radio.IsSet);
+        }
 
-    [TestMethod]
-    public void IsSet_ReturnsFalse_WhenRadioIsUnselected()
-    {
-        // Arrange
-        var radio = ControlObject;
+        [TestMethod]
+        public void IsSet_ReturnsFalse_WhenRadioIsUnselected()
+        {
+            // Arrange
+            var radio = ControlObject;
 
-        // Act
-        var state = radio.IsSet;
+            // Act
+            var state = radio.IsSet;
 
-        // Assert
-        Assert.AreEqual("false", state);
+            // Assert
+            Assert.AreEqual("false", state);
+        }
     }
 }
-
-
-

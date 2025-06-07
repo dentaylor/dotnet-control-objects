@@ -1,7 +1,8 @@
 ﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using System;
 
-namespace SeleniumControlObjectsTests
+namespace SeleniumControlObjectTests
 {
     public abstract class TestBase<TControlObject>
     {
