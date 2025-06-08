@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace SeleniumControlObjects;
+namespace Cop.Selenium.ControlObjects.Html5;
 
 internal static class FuncExtensions
 {

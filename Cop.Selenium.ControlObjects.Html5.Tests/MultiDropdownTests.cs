@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SeleniumControlObjectTests;
+namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 [TestClass]
 public class MultiDropdownTests : TestBase<MultiDropdown>

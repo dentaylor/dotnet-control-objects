@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium.Chrome;
 using System;
 
-namespace SeleniumControlObjectTests;
+namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 /// <summary>
 /// Base class for all Control Object test classes. 

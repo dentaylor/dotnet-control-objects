@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace SeleniumControlObjectTests;
+namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 [TestClass]
 public class DropdownTests : TestBase<Dropdown>

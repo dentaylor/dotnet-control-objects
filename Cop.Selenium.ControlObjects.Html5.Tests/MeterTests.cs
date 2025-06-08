@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SeleniumControlObjectTests;
+namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 [TestClass]
 public class MeterTests : TestBase<Meter>

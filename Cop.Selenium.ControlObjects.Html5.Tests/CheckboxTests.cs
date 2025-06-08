@@ -1,4 +1,4 @@
-﻿namespace SeleniumControlObjectTests;
+﻿namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 [TestClass]
 public class CheckboxTests : TestBase<Checkbox>

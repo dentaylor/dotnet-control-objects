@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace SeleniumControlObjects;
+namespace Cop.Selenium.ControlObjects.Html5;
 
 public class Dropdown(IWebElement element) : IDropdown
 {

@@ -1,4 +1,4 @@
-﻿namespace SeleniumControlObjects
+﻿namespace Cop.Selenium.ControlObjects.Html5
 {
     public interface ICheckbox
     {

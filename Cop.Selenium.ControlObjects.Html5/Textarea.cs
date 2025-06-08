@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SeleniumControlObjects;
+namespace Cop.Selenium.ControlObjects.Html5;
 
 public class Textarea(IWebElement element) : ITextarea
 {
