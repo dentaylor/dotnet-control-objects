@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace SeleniumControlObjects;
 
-internal static class WebDriverExtensions
+internal static class FuncExtensions
 {
     /// <summary>
     /// Executes a function until the result is true.
