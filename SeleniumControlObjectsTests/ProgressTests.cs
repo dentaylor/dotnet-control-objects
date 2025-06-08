@@ -1,41 +1,59 @@
-﻿using OpenQA.Selenium;
-using SeleniumControlObjects;
+﻿using System;
 
-namespace SeleniumControlObjectTests
+namespace SeleniumControlObjectTests;
+
+[TestClass]
+public class ProgressTests : TestBase<Progress>
 {
-    [TestClass]
-    public class ProgressTests : TestBase<Progress>
+    [TestInitialize]
+    public void Init()
     {
-        [TestInitialize]
-        public void Init()
-        {
-            Setup("progress-test", By.Id("upload-progress"));
-        }
+        Setup("progress", By.TagName("progress"));
+    }
 
-        [TestMethod]
-        public void Value_ReturnsCurrentProgressValue()
-        {
-            // Arrange
-            var progress = ControlObject;
+    [TestMethod]
+    public void Value_ReturnsCurrentProgressValue()
+    {
+        // Arrange
+        var anyValue = 67;
 
-            // Act
-            var value = progress.Value;
+        SetValue(anyValue);
 
-            // Assert
-            Assert.AreEqual(45, value, "Progress value should be 45.");
-        }
+        // Act
+        var value = ControlObject.Value;
 
-        [TestMethod]
-        public void Max_ReturnsMaximumProgressValue()
-        {
-            // Arrange
-            var progress = ControlObject;
+        // Assert
+        Assert.AreEqual(anyValue, value, "Progress value should be the default value.");
+    }
 
-            // Act
-            var max = progress.Max;
+    [TestMethod]
+    public void Max_ReturnsMaxProgressValue()
+    {
+        // Arrange
+        var maxValue = 100;
 
-            // Assert
-            Assert.AreEqual(100, max, "Progress max should be 100.");
-        }
+        // Act
+        // Assert
+        Assert.AreEqual(maxValue, ControlObject.Max);
+    }
+
+    [TestMethod]
+    public void Null_Value_ThrowsInvalidOperationException()
+    {
+        // Arrange
+        RemoveAttribute("value");
+
+        // Act & Assert
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.Value; });
+    }
+
+    [TestMethod]
+    public void Null_Max_ThrowsInvalidOperationException()
+    {
+        // Arrange
+        RemoveAttribute("max");
+
+        // Act & Assert
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.Max; });
     }
 }

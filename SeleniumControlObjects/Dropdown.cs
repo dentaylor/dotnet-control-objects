@@ -1,40 +1,32 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace SeleniumControlObjects
+namespace SeleniumControlObjects;
+
+public class Dropdown(IWebElement element) : IDropdown
 {
-    public class Dropdown
+    private SelectElement SelectElement => new(element);
+
+    public string[] Options => [.. SelectElement.Options.Select(o => o.Text)];
+
+    public string Selected => SelectElement.SelectedOption?.Text ?? string.Empty;
+
+    public void Select(string text)
     {
-        private readonly SelectElement _selectElement;
-
-        public Dropdown(IWebElement element)
+        if(string.IsNullOrEmpty(text))
         {
-            if (element == null)
-                throw new ArgumentNullException(nameof(element));
-
-            _selectElement = new SelectElement(element);
+            return;
         }
 
-        public List<string> Options
+        if (Selected == text)
         {
-            get => _selectElement.Options.Select(o => o.Text).ToList();
+            return;
         }
 
-        public string Selected
-        {
-            get => _selectElement.SelectedOption?.Text ?? string.Empty;
-        }
+        var match = SelectElement.Options.FirstOrDefault(o => o.Text == text)
+            ?? throw new ArgumentException($"Option '{text}' not found in dropdown.");
 
-        public void Select(string text)
-        {
-            var match = _selectElement.Options.FirstOrDefault(o => o.Text == text);
-            if (match == null)
-                throw new InvalidOperationException($"Option '{text}' not found in dropdown.");
-
-            _selectElement.SelectByText(text);
-        }
+        SelectElement.SelectByText(text);
     }
 }

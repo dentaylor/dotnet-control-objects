@@ -1,27 +1,23 @@
-﻿using OpenQA.Selenium;
-using SeleniumControlObjects;
+﻿namespace SeleniumControlObjectTests;
 
-namespace SeleniumControlObjectTests
+[TestClass]
+public class ButtonTests : TestBase<Button>
 {
-    [TestClass]
-    public class ButtonTests : TestBase<Button>
+    [TestInitialize]
+    public void Setup()
     {
-        [TestInitialize]
-        public void Setup()
-        {
-            Setup("button", By.CssSelector("#submit-btn"));
-        }
+        Setup("button", By.CssSelector("button"));
+    }
 
-        [TestMethod]
-        public void ClickButton()
-        {
-            // Arrange
-            // Act
-            ControlObject.Click();
+    [TestMethod]
+    public void ClickButton()
+    {
+        // Arrange
+        // Act
+        ControlObject.Click();
 
-            // Assert
-            var text = Driver.FindElement(By.CssSelector(".alert")).Text;
-            Assert.Equals(text, " You clicked the button! ");
-        }
+        // Assert
+        var text = Driver.FindElement(By.CssSelector(".alert")).Text;
+        Assert.AreEqual("You clicked the button!", text);
     }
 }

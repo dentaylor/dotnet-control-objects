@@ -1,11 +1,34 @@
-﻿namespace SeleniumControlObjects
+﻿namespace SeleniumControlObjects;
+
+public interface IMeter
 {
-    public interface IMeter
-    {
-        double Value { get; }
+    /// <summary>
+    /// Gets the value of the meter.
+    /// </summary>
+    double Value { get; }
 
-        double Min { get; }
+    /// <summary>
+    /// Gets the minimum value of the meter.
+    /// </summary>
+    double Min { get; }
 
-        double Max { get; }
-    }
+    /// <summary>
+    /// Gets the maximum value of the meter.
+    /// </summary>
+    double Max { get; }
+
+    /// <summary>
+    /// Gets the low value of the meter.
+    /// </summary>
+    double Low { get; }
+
+    /// <summary>
+    /// Gets the high value of the meter. 
+    /// </summary>
+    double High { get; }
+
+    /// <summary>
+    /// Gets the optimum value of the meter. 
+    /// </summary>
+    double Optimum { get; }
 }

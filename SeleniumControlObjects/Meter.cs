@@ -1,18 +1,26 @@
-﻿using OpenQA.Selenium;
+﻿using System;
 
-namespace SeleniumControlObjects
+namespace SeleniumControlObjects;
+
+public class Meter(IWebElement element) : IMeter
 {
-    public class Meter : IMeter
+    public double Value => ParseAttribute("value");
+
+    public double Min => ParseAttribute("min");
+
+    public double Max => ParseAttribute("max");
+
+    public double Low => ParseAttribute("low");
+
+    public double High => ParseAttribute("high");
+
+    public double Optimum => ParseAttribute("optimum");
+
+    private double ParseAttribute(string attributeName)
     {
-        private readonly IWebElement _element;
+        var attr = element.GetDomAttribute(attributeName)
+            ?? throw new InvalidOperationException($"{attributeName} attribute was null");
 
-        public Meter(IWebElement element)
-        {
-            _element = element;
-        }
-
-        public double Value => double.Parse(_element.GetAttribute("value"));
-        public double Min => double.Parse(_element.GetAttribute("min") ?? "0");
-        public double Max => double.Parse(_element.GetAttribute("max") ?? "1");
+        return double.Parse(attr);
     }
 }

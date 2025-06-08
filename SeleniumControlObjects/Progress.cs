@@ -1,17 +1,18 @@
-﻿using OpenQA.Selenium;
+﻿using System;
 
-namespace SeleniumControlObjects
+namespace SeleniumControlObjects;
+
+public class Progress(IWebElement element) : IProgress
 {
-    public class Progress : IProgress
+    public double Value => ParseAttribute("value");
+
+    public double Max => ParseAttribute("max");
+
+    private double ParseAttribute(string attributeName)
     {
-        private readonly IWebElement _element;
+        var attr = element.GetDomAttribute(attributeName)
+            ?? throw new InvalidOperationException($"{attributeName} attribute was null");
 
-        public Progress(IWebElement element)
-        {
-            _element = element;
-        }
-
-        public double Value => double.Parse(_element.GetAttribute("value") ?? "0");
-        public double Max => double.Parse(_element.GetAttribute("max") ?? "1");
+        return double.Parse(attr);
     }
 }

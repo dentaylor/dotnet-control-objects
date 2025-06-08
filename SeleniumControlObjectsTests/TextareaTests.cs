@@ -1,42 +1,44 @@
-﻿using OpenQA.Selenium;
-using SeleniumControlObjects;
+﻿namespace SeleniumControlObjectTests;
 
-namespace SeleniumControlObjectTests
+[TestClass]
+public class TextareaTests : TestBase<Textarea>
 {
-    [TestClass]
-    public class TextareaTests : TestBase<Textarea>
+    [TestInitialize]
+    public void Init()
     {
-        [TestInitialize]
-        public void Init()
-        {
-            Setup("textarea-test", By.Id("comments"));
-        }
+        Setup("textarea", By.Id("Message"));
+    }
 
-        [TestMethod]
-        public void Set_ChangesTextareaValue()
-        {
-            // Arrange
-            var textarea = ControlObject;
+    [TestMethod]
+    public void Set_ChangesTextareaValue()
+    {
+        // Arrange
+        var text = "Multiline\r\nText";
 
-            // Act
-            textarea.Set("This is a test comment.");
+        // Act
+        ControlObject.Set(text);
 
-            // Assert
-            Assert.AreEqual("This is a test comment.", textarea.Text);
-        }
+        // Assert
+        Assert.AreEqual(text, ControlObject.Text);
+    }
 
-        [TestMethod]
-        public void Value_ReturnsCurrentText()
-        {
-            // Arrange
-            var textarea = ControlObject;
-            textarea.Set("Multiline\nText");
+    [TestMethod]
+    public void Value_ReturnsCurrentText()
+    {
+        // Arrange
+        var text = "Multiline\r\nText";
 
-            // Act
-            var value = textarea.Text;
+        SetTextareaValue(text);
 
-            // Assert
-            Assert.AreEqual("Multiline\nText", value);
-        }
+        // Act
+        var value = ControlObject.Text;
+
+        // Assert
+        Assert.AreEqual(text, value);
+    }
+
+    private void SetTextareaValue(string text)
+    {
+        ExecuteScript("arguments[0].value = arguments[1];", Driver.FindElement(Locator), text);
     }
 }

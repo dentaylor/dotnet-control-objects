@@ -1,24 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿namespace SeleniumControlObjects;
 
-namespace SeleniumControlObjects
+public class Radio(IWebElement element) : IRadio
 {
-    public class Radio : IRadio
+    public bool IsSet => element.Selected;
+
+    public void Click()
     {
-        private readonly IWebElement _element;
-
-        public Radio(IWebElement element)
-        {
-            _element = element;
-        }
-
-        public void Set(bool? isSet)
-        {
-            if (isSet == true && !_element.Selected)
-            {
-                _element.Click();
-            }
-        }
-
-        public string IsSet => _element.Selected.ToString().ToLower();
+        element.Click();
     }
 }

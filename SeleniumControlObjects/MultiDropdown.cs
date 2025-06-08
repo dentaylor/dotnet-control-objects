@@ -1,37 +1,38 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium.Support.UI;
+using System;
 using System.Linq;
 
-namespace SeleniumControlObjects
+namespace SeleniumControlObjects;
+
+public class MultiDropdown(IWebElement element) : IMultiDropdown
 {
-    public class MultiDropdown : IMultiDropdown
+    private SelectElement SelectElement => new(element);
+
+    public string[] Selected => [.. SelectElement.AllSelectedOptions.Select(option => option.Text)];
+
+    public string[] Options => [.. SelectElement.Options.Select(x => x.Text)];
+
+    public void Select(params string[] texts)
     {
-        private readonly IWebElement _element;
-
-        public MultiDropdown(IWebElement element)
+        if (texts == null || texts.Length == 0)
         {
-            _element = element;
+            return;
         }
 
-        public void Select(params string[] texts)
+        var missingOptions = texts.Except(Options).ToArray();
+        if (missingOptions.Length > 0)
         {
-            var select = new SelectElement(_element);
-
-            foreach (var text in texts)
-            {
-                select.SelectByText(text);
-            }
+            throw new ArgumentException($"Options not found: {string.Join(", ", missingOptions)}");
         }
 
-        public string[] Selected
+        foreach (var text in texts)
         {
-            get
-            {
-                var select = new SelectElement(_element);
-                return select.AllSelectedOptions
-                             .Select(option => option.Text)
-                             .ToArray();
-            }
+            SelectElement.SelectByText(text);
         }
+    }
+
+    public void Clear()
+    {
+        SelectElement.DeselectAll();
     }
 }

@@ -1,25 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-	  <ImplicitUsings>disable</ImplicitUsings>
-	  <Nullable>enable</Nullable>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.9.1" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.9.1" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2" />
-    <PackageReference Include="Selenium.Support" Version="4.32.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.32.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="136.0.7103.9400" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.9.1" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.9.1" />
+		<PackageReference Include="coverlet.collector" Version="3.1.2" />
+		<PackageReference Include="Selenium.Support" Version="4.32.0" />
+		<PackageReference Include="Selenium.WebDriver" Version="4.32.0" />
+		<PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="136.0.7103.9400" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SeleniumControlObjects\SeleniumControlObjects.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SeleniumControlObjects\SeleniumControlObjects.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update=".runsettings">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 
 </Project>

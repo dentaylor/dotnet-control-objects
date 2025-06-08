@@ -1,22 +1,12 @@
-﻿using OpenQA.Selenium;
+﻿namespace SeleniumControlObjects;
 
-namespace SeleniumControlObjects
+public class ComboBox(IWebElement element) : IComboBox
 {
-    public class ComboBox : IComboBox
+    public string Selected => element.GetAttribute("value") ?? string.Empty;
+
+    public void Set(string text)
     {
-        private readonly IWebElement _element;
-
-        public ComboBox(IWebElement element)
-        {
-            _element = element;
-        }
-
-        public void Set(string text)
-        {
-            _element.Clear();
-            _element.SendKeys(text);
-        }
-
-        public string Selected => _element.GetAttribute("value");
+        element.Clear();
+        element.SendKeys(text);
     }
 }

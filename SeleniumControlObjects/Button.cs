@@ -1,19 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿namespace SeleniumControlObjects;
 
-namespace SeleniumControlObjects
+public class Button(IWebElement element) : IButton
 {
-    public class Button
+    public void Click()
     {
-        private readonly IWebElement _element;
-
-        public Button(IWebElement element)
-        {
-            _element = element;
-        }
-
-        public void Click()
-        {
-            _element.Click();
-        }
+        element.Click();
     }
 }

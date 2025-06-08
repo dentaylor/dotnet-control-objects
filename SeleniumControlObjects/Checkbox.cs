@@ -1,22 +1,19 @@
-﻿using OpenQA.Selenium;
+﻿namespace SeleniumControlObjects;
 
-namespace SeleniumControlObjects
+public class Checkbox(IWebElement element) : ICheckbox
 {
-    public class Checkbox
-    {
-        private readonly IWebElement _element;
+    public bool IsChecked => element.Selected;
 
-        public Checkbox(IWebElement element)
+    public void Set(bool? isChecked)
+    {
+        if(isChecked == null)
         {
-            _element = element;
+            return;
         }
 
-        public bool IsChecked => _element.Selected;
-
-        public void Set(bool? isChecked)
+        if (!element.Selected != IsChecked)
         {
-            if (!_element.Selected)
-                _element.Click();
+            element.Click();
         }
     }
 }

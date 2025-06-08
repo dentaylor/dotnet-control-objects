@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<TestRunParameters>
+		<Parameter name="autUrl" value="http://localhost:53433/" />
+	</TestRunParameters>
+
+	<!-- Configurations for test run -->
+	<RunConfiguration>
+		<!-- Path relative to solution directory for test results -->
+		<ResultsDirectory>c:\temp</ResultsDirectory>
+
+		<!-- Max number of test agents to run in parallel (0 = auto) -->
+		<MaxCpuCount>0</MaxCpuCount>
+
+		<!-- Test session timeout in milliseconds (0 = infinite) -->
+		<TestSessionTimeout>120000</TestSessionTimeout>
+
+		<!-- Directory for test run logs -->
+		<LogDirectory>c:\temp</LogDirectory>
+
+		<!-- Disable parallelization -->
+		<DisableParallelization>false</DisableParallelization>
+	</RunConfiguration>
+</RunSettings>

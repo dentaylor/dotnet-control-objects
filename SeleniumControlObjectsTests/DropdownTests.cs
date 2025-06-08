@@ -1,44 +1,124 @@
-using OpenQA.Selenium;
-using SeleniumControlObjects;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 
-namespace SeleniumControlObjectTests
+namespace SeleniumControlObjectTests;
+
+[TestClass]
+public class DropdownTests : TestBase<Dropdown>
 {
-    [TestClass]
-    public class DropdownTests : TestBase<Dropdown>
+    private readonly string[] _options =
+        [
+            "Option A",
+            "Option B",
+            "Option C"
+        ];
+
+    private string DefaultSelectedOption => _options.First();
+
+    [TestInitialize]
+    public void SetupTest()
     {
-        private readonly List<string> _options = new List<string> { "Option A", "Option B", "Option C" };
+        Setup("dropdown", By.CssSelector("#dropdown"));
+    }
 
-        [TestInitialize]
-        public void SetupTest()
-        {
-            Setup("dropdown", By.CssSelector("#dropdown"));
-        }
+    [TestMethod]
+    public void CanGetOptions()
+    {
+        // Arrange
+        // Act
+        // Assert
+        CollectionAssert.AreEqual(_options, ControlObject.Options);
+    }
 
-        [TestMethod]
-        public void CanGetOptions()
-        {
-            // Arrange
-            // Act
-            var result = ControlObject.Options;
+    [TestMethod]
+    public void CanGetSelected()
+    {
+        // Arrange
+        var currentValue = _options.First();
 
-            // Assert
-            Assert.AreEqual(_options, result);
-        }
+        SetViaJs(currentValue);
 
-        [TestMethod]
-        public void CanSelectThenGetSelected()
-        {
-            // Arrange
-            var toSelect = _options.Skip(1).First();
+        // Act
+        // Assert
+        Assert.AreEqual(currentValue, ControlObject.Selected);
+    }
 
-            // Act
-            ControlObject.Select(toSelect);
-            var selected = ControlObject.Selected;
+    [TestMethod]
+    public void SelectingInvalidOptionThrows()
+    {
+        // Arrange
+        var toSelect = "Invalid Option";
 
-            // Assert
-            Assert.AreEqual(toSelect, selected);
-        }
+        // Act & Assert
+        Assert.ThrowsExactly<ArgumentException>(() => ControlObject.Select(toSelect));
+    }
+
+    [TestMethod]
+    public void CanGetSelectedWhenNoneSelected()
+    {
+        // Arrange
+        // Act
+        // Assert
+        Assert.AreEqual(DefaultSelectedOption, ControlObject.Selected);
+    }
+
+    [TestMethod]
+    public void CanGetSelectedWhenOptionSelected()
+    {
+        // Arrange
+        var toSelect = _options.Skip(1).First();
+
+        SetViaJs(toSelect);
+
+        // Act
+        // Assert
+        Assert.AreEqual(toSelect, ControlObject.Selected);
+    }
+
+    [TestMethod]
+    public void CanSelectAlreadySelectedOption()
+    {
+        // Arrange
+        var toSelect = _options.First();
+
+        SetViaJs(toSelect);
+
+        // Act
+        ControlObject.Select(toSelect);
+
+        // Assert
+        Assert.AreEqual(toSelect, ControlObject.Selected);
+    }
+
+    [TestMethod]
+    [DataRow(null)]
+    [DataRow("")]
+    public void SelectingNullOrEmptyDoesNothing(string text)
+    {
+        // Arrange
+        var initialSelected = ControlObject.Selected;
+
+        // Act
+        ControlObject.Select(text);
+
+        // Assert
+        Assert.AreEqual(initialSelected, ControlObject.Selected);
+    }
+
+    private void SetViaJs(string value)
+    {
+        var script = @"
+        var select = arguments[0];
+        var value = arguments[1];
+        for (var i = 0; i < select.options.length; i++) {
+            if (select.options[i].text === value) {
+                select.selectedIndex = i;
+                select.options[i].selected = true;
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+                break;
+            }
+        }";
+
+        ExecuteScript(script, Driver.FindElement(Locator), value);
     }
 }

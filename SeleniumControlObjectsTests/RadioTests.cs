@@ -1,55 +1,33 @@
-﻿using OpenQA.Selenium;
-using SeleniumControlObjects;
+﻿namespace SeleniumControlObjectTests;
 
-namespace SeleniumControlObjectTests
+[TestClass]
+public class RadioTests : TestBase<Radio>
 {
-    [TestClass]
-    public class RadioTests : TestBase<Radio>
+    [TestInitialize]
+    public void Init()
     {
-        [TestInitialize]
-        public void Init()
-        {
-            Setup("radio-test", By.Id("credit"));
-        }
+        Setup("radio", By.Id("Red"));
+    }
 
-        [TestMethod]
-        public void Set_True_SelectsRadioButton()
-        {
-            // Arrange
-            var radio = ControlObject;
+    [TestMethod]
+    public void Set_True_SelectsRadioButton()
+    {
+        // Arrange
+        // Act
+        ControlObject.Click();
 
-            // Act
-            radio.Set(true);
+        // Assert
+        Assert.IsTrue(ControlObject.IsSet);
+    }
 
-            // Assert
-            Assert.AreEqual("true", radio.IsSet);
-        }
+    [TestMethod]
+    public void IsSet_ReturnsFalse_WhenRadioButtonNotSelected()
+    {
+        // Arrange
+        var defaultState = false;
 
-        [TestMethod]
-        public void Set_False_DoesNotDeselectRadioButton()
-        {
-            // Arrange
-            var radio = ControlObject;
-            radio.Set(true);
-
-            // Act
-            radio.Set(false); // should be ignored
-
-            // Assert
-            Assert.AreEqual("true", radio.IsSet);
-        }
-
-        [TestMethod]
-        public void IsSet_ReturnsFalse_WhenRadioIsUnselected()
-        {
-            // Arrange
-            var radio = ControlObject;
-
-            // Act
-            var state = radio.IsSet;
-
-            // Assert
-            Assert.AreEqual("false", state);
-        }
+        // Act      
+        // Assert
+        Assert.AreEqual(defaultState, ControlObject.IsSet);
     }
 }

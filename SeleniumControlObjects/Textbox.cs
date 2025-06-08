@@ -1,33 +1,26 @@
-﻿using OpenQA.Selenium;
-using System;
+﻿using System;
 
-namespace SeleniumControlObjects
+namespace SeleniumControlObjects;
+
+public class Textbox(IWebElement element) : ITextbox
 {
-    public class Textbox
+    public virtual TimeSpan SetTimeout => TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// Gets the text value.
+    /// </summary>
+    public string Text => element.GetAttribute("value") ?? string.Empty;
+
+    /// <summary>
+    /// Sets the text value.
+    /// </summary>
+    /// <param name="text">Text to set.</param>
+    public void Set(string text)
     {
-        private IWebElement _element;
+        element.Clear();
+        element.SendKeys(text);
 
-        public Textbox(IWebElement element)
-        {
-            _element = element;
-        }
-
-        /// <summary>
-        /// Gets the text value.
-        /// </summary>
-        public string Text => _element.GetAttribute("value");
-
-        /// <summary>
-        /// Sets the text value.
-        /// </summary>
-        /// <param name="text">Text to set.</param>
-        public void Set(string text)
-        {
-            _element.Clear();
-            _element.SendKeys(text);
-
-            var isSet = () => Text == text;
-            isSet.WaitUntilTrue(TimeSpan.FromSeconds(5), $"Could not set text to '{text}' within the timeout. Actual value was '{Text}'");
-        }
+        var isSet = () => Text == text;
+        isSet.WaitUntilTrue(SetTimeout, $"Could not set text to '{text}' within the timeout. Actual value was '{Text}'");
     }
 }

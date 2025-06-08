@@ -1,55 +1,61 @@
-﻿using OpenQA.Selenium;
-using SeleniumControlObjects;
+﻿namespace SeleniumControlObjectTests;
 
-namespace SeleniumControlObjectTests
+[TestClass]
+public class CheckboxTests : TestBase<Checkbox>
 {
-    [TestClass]
-    public class CheckboxTests : TestBase<Checkbox>
+    [TestInitialize]
+    public void Setup()
     {
-        [TestInitialize]
-        public void Setup()
-        {
-            Setup("checkbox", By.CssSelector("#accept-terms"));
-        }
+        Setup("checkbox", By.CssSelector("input[type='checkbox']"));
+    }
 
-        [TestMethod]
-        public void Checkbox_Check_SetsCheckedState()
-        {
-            // Arrange
-            // Act
-            ControlObject.Set(true);
-            var isChecked = ControlObject.IsChecked;
+    [TestMethod]
+    public void Toggles_When_Set_True()
+    {
+        // Arrange
+        var isChecked = true;
 
-            // Assert
-            Assert.IsTrue(isChecked);
-        }
+        // Act
+        ControlObject.Set(isChecked);
 
-        [TestMethod]
-        public void Checkbox_Set_False()
-        {
-            // Arrange
-            Checkbox_Check_SetsCheckedState();
+        // Assert
+        Assert.AreEqual(isChecked, ControlObject.IsChecked);
+    }
 
-            // Act
-            ControlObject.Set(false);
-            var isChecked = ControlObject.IsChecked;
+    [TestMethod]
+    public void Toggles_When_Set_False()
+    {
+        // Arrange
+        var isChecked = false;
+        var initialIsChecked = true;
 
-            // Assert
-            Assert.IsFalse(isChecked);
-        }
+        SetCheckboxState(initialIsChecked);
 
-        [TestMethod]
-        public void Checkbox_SetFalse_DoesNothingIfSetNull()
-        {
-            // Arrange
-            Checkbox_Check_SetsCheckedState();
+        // Act
+        ControlObject.Set(isChecked);
 
-            // Act
-            ControlObject.Set(null);
-            var isChecked = ControlObject.IsChecked;
+        // Assert
+        Assert.AreEqual(isChecked, ControlObject.IsChecked);
+    }
 
-            // Assert
-            Assert.IsTrue(isChecked);
-        }
+    [TestMethod]
+    public void NoOp_When_Null()
+    {
+        // Arrange
+        bool? isChecked = null;
+        var initialIsChecked = true;
+
+        SetCheckboxState(initialIsChecked);
+
+        // Act
+        ControlObject.Set(isChecked);
+
+        // Assert
+        Assert.AreEqual(initialIsChecked, ControlObject.IsChecked);
+    }
+
+    private void SetCheckboxState(bool isChecked)
+    {
+        ExecuteScript($"arguments[0].checked = {isChecked.ToString().ToLower()};", Driver.FindElement(Locator));
     }
 }

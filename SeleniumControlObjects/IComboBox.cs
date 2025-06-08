@@ -1,9 +1,14 @@
-﻿namespace SeleniumControlObjects
-{
-    public interface IComboBox
-    {
-        void Set(string text);
+﻿namespace SeleniumControlObjects;
 
-        string Selected { get; }
-    }
+public interface IComboBox
+{
+    /// <summary>
+    /// Sets the text value. 
+    /// </summary>
+    void Set(string text);
+
+    /// <summary>
+    /// Gets the selected value.  
+    /// </summary>
+    string Selected { get; }
 }
