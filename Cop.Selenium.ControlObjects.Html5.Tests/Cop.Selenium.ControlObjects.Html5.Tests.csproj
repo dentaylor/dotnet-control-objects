@@ -4,8 +4,8 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-
 		<IsPackable>false</IsPackable>
+		<RunSettingsFilePath>$(MSBuildThisFileDirectory).runsettings</RunSettingsFilePath>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,12 +19,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SeleniumControlObjects\SeleniumControlObjects.csproj" />
+	  <ProjectReference Include="..\Cop.Selenium.ControlObjects.Html5\Cop.Selenium.ControlObjects.Html5.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Update=".runsettings">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 

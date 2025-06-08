@@ -36,11 +36,12 @@ public abstract class TestBase<TControlObject>
     /// </param>
     public void LaunchAndNavigateToPage(string page)
     {
+        var url = TestContext.Properties["autUrl"]?.ToString()
+            ?? throw new InvalidOperationException("The 'autUrl' property is not set. Ensure that a runsettings file is selected.");
+
         Driver = new ChromeDriver();
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         Driver.Manage().Window.Maximize();
-
-        var url = TestContext.Properties["autUrl"]?.ToString();
 
         Driver.Navigate().GoToUrl(url + page);
     }

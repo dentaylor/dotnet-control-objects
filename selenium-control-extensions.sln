@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumControlObjects", "SeleniumControlObjects\SeleniumControlObjects.csproj", "{BCEB005B-07F5-4930-96D2-D604AA39D9B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cop.Selenium.ControlObjects.Html5", "Cop.Selenium.ControlObjects.Html5\Cop.Selenium.ControlObjects.Html5.csproj", "{E9E73B85-3A85-5132-144F-32A2541D5116}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumControlObjectTests", "SeleniumControlObjectsTests\SeleniumControlObjectTests.csproj", "{D5C57883-C696-4D0C-A4CD-4E719112FD0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cop.Selenium.ControlObjects.Html5.Tests", "Cop.Selenium.ControlObjects.Html5.Tests\Cop.Selenium.ControlObjects.Html5.Tests.csproj", "{94B254DD-9437-5432-0FA0-7BB7A860D6E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Html5Demo", "Html5Demo\Html5Demo.csproj", "{6B1D2326-1067-4F6C-8EF2-6053DB2BA633}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cop.Html5.Demo", "Html5Demo\Cop.Html5.Demo.csproj", "{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BCEB005B-07F5-4930-96D2-D604AA39D9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCEB005B-07F5-4930-96D2-D604AA39D9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCEB005B-07F5-4930-96D2-D604AA39D9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCEB005B-07F5-4930-96D2-D604AA39D9B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5C57883-C696-4D0C-A4CD-4E719112FD0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5C57883-C696-4D0C-A4CD-4E719112FD0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5C57883-C696-4D0C-A4CD-4E719112FD0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5C57883-C696-4D0C-A4CD-4E719112FD0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B1D2326-1067-4F6C-8EF2-6053DB2BA633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B1D2326-1067-4F6C-8EF2-6053DB2BA633}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B1D2326-1067-4F6C-8EF2-6053DB2BA633}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B1D2326-1067-4F6C-8EF2-6053DB2BA633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E73B85-3A85-5132-144F-32A2541D5116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E73B85-3A85-5132-144F-32A2541D5116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E73B85-3A85-5132-144F-32A2541D5116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E73B85-3A85-5132-144F-32A2541D5116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94B254DD-9437-5432-0FA0-7BB7A860D6E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94B254DD-9437-5432-0FA0-7BB7A860D6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94B254DD-9437-5432-0FA0-7BB7A860D6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94B254DD-9437-5432-0FA0-7BB7A860D6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
