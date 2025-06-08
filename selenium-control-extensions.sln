@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cop.Selenium.ControlObjects
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cop.Selenium.ControlObjects.Html5.Tests", "Cop.Selenium.ControlObjects.Html5.Tests\Cop.Selenium.ControlObjects.Html5.Tests.csproj", "{94B254DD-9437-5432-0FA0-7BB7A860D6E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cop.Html5.Demo", "Html5Demo\Cop.Html5.Demo.csproj", "{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cop.Html5.Demo", "Cop.Html5.Demo\Cop.Html5.Demo.csproj", "{1AAE74A5-C67D-9B30-1A7C-99D370DB8FF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{94B254DD-9437-5432-0FA0-7BB7A860D6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94B254DD-9437-5432-0FA0-7BB7A860D6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94B254DD-9437-5432-0FA0-7BB7A860D6E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65ABD5E6-9628-9BFA-E6EC-9C36310FAB88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AAE74A5-C67D-9B30-1A7C-99D370DB8FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AAE74A5-C67D-9B30-1A7C-99D370DB8FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AAE74A5-C67D-9B30-1A7C-99D370DB8FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AAE74A5-C67D-9B30-1A7C-99D370DB8FF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
