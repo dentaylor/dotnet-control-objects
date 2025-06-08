@@ -3,10 +3,12 @@
 [TestClass]
 public class ButtonTests : TestBase<Button>
 {
+    protected override By Locator => By.CssSelector("button");
+
     [TestInitialize]
     public void Setup()
     {
-        Setup("button", By.CssSelector("button"));
+        LaunchAndNavigateToPage("button");
     }
 
     [TestMethod]

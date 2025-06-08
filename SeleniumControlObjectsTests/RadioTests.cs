@@ -3,10 +3,12 @@
 [TestClass]
 public class RadioTests : TestBase<Radio>
 {
+    protected override By Locator => By.Id("Red");
+
     [TestInitialize]
     public void Init()
     {
-        Setup("radio", By.Id("Red"));
+        LaunchAndNavigateToPage("radio");
     }
 
     [TestMethod]

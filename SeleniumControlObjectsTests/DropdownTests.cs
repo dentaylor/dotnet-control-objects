@@ -6,6 +6,8 @@ namespace SeleniumControlObjectTests;
 [TestClass]
 public class DropdownTests : TestBase<Dropdown>
 {
+    protected override By Locator => By.CssSelector("#dropdown");
+
     private readonly string[] _options =
         [
             "Option A",
@@ -18,7 +20,7 @@ public class DropdownTests : TestBase<Dropdown>
     [TestInitialize]
     public void SetupTest()
     {
-        Setup("dropdown", By.CssSelector("#dropdown"));
+        LaunchAndNavigateToPage("dropdown");
     }
 
     [TestMethod]

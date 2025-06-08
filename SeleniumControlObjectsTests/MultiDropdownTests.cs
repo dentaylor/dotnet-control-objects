@@ -17,10 +17,12 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         "Option 5"
     ];
 
+    protected override By Locator => By.Id("SelectedOptions");
+
     [TestInitialize]
     public void Init()
     {
-        Setup("multidropdown", By.Id("SelectedOptions"));
+        LaunchAndNavigateToPage("multidropdown");
     }
 
     [TestMethod]

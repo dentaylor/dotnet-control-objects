@@ -3,10 +3,12 @@
 [TestClass]
 public class TextareaTests : TestBase<Textarea>
 {
+    protected override By Locator => By.Id("Message");
+
     [TestInitialize]
     public void Init()
     {
-        Setup("textarea", By.Id("Message"));
+        LaunchAndNavigateToPage("textarea");
     }
 
     [TestMethod]

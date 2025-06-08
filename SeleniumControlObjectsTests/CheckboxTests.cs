@@ -3,10 +3,12 @@
 [TestClass]
 public class CheckboxTests : TestBase<Checkbox>
 {
+    protected override By Locator => By.CssSelector("input[type='checkbox']");
+
     [TestInitialize]
     public void Setup()
     {
-        Setup("checkbox", By.CssSelector("input[type='checkbox']"));
+        LaunchAndNavigateToPage("checkbox");
     }
 
     [TestMethod]

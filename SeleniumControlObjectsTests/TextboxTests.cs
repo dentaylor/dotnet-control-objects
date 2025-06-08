@@ -3,10 +3,12 @@
 [TestClass]
 public class TextboxTests : TestBase<Textbox>
 {
+    protected override By Locator => By.CssSelector("#username");
+
     [TestInitialize]
     public void SetupTest()
     {
-        Setup("textbox", By.CssSelector("#username"));
+        LaunchAndNavigateToPage("textbox");
     }
 
     [TestMethod]

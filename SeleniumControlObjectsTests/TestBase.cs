@@ -17,9 +17,10 @@ public abstract class TestBase<TControlObject>
     // MsTest provides this property.
     public TestContext TestContext { get; set; }
 
-    protected IWebDriver Driver { get; set; }
+    // The locator for the control element on the page under test.
+    protected abstract By Locator { get; }
 
-    protected By Locator { get; set; }
+    protected IWebDriver Driver { get; set; }
 
     protected TControlObject ControlObject => (TControlObject)Activator.CreateInstance(typeof(TControlObject), Driver.FindElement(Locator));
 
@@ -33,10 +34,8 @@ public abstract class TestBase<TControlObject>
     /// <param name="locator">
     /// The Selenium <see cref="By"/> locator used to find the specific control element on the page under test.
     /// </param>
-    public void Setup(string page, By locator)
+    public void LaunchAndNavigateToPage(string page)
     {
-        Locator = locator;
-
         Driver = new ChromeDriver();
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         Driver.Manage().Window.Maximize();

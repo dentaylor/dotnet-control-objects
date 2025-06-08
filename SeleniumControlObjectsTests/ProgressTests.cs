@@ -5,10 +5,12 @@ namespace SeleniumControlObjectTests;
 [TestClass]
 public class ProgressTests : TestBase<Progress>
 {
+    protected override By Locator => By.TagName("progress");
+
     [TestInitialize]
     public void Init()
     {
-        Setup("progress", By.TagName("progress"));
+        LaunchAndNavigateToPage("progress");
     }
 
     [TestMethod]

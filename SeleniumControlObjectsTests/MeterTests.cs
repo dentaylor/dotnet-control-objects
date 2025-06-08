@@ -11,10 +11,12 @@ public class MeterTests : TestBase<Meter>
     private readonly double defaultHigh = 70;
     private readonly double defaultOptimum = 80;
 
+    protected override By Locator => By.TagName("meter");
+
     [TestInitialize]
     public void Init()
     {
-        Setup("meter", By.TagName("meter"));
+        LaunchAndNavigateToPage("meter");
     }
 
     [TestMethod]
