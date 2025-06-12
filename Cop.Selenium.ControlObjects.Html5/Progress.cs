@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Cop.Selenium.ControlObjects.Html5;
 
-public class Progress(IWebElement element) : IProgress
+public class Progress(ILocateElements locator) : IProgress
 {
-    public double Value => ParseAttribute("value");
+    public Task<double> GetValueAsync() => ParseAttributeAsync("value");
 
-    public double Max => ParseAttribute("max");
+    public Task<double> GetMaxAsync() => ParseAttributeAsync("max");
 
-    private double ParseAttribute(string attributeName)
+    private async Task<double> ParseAttributeAsync(string attributeName)
     {
-        var attr = element.GetDomAttribute(attributeName)
+        var attr = await locator.GetDomAttributeAsync(attributeName)
             ?? throw new InvalidOperationException($"{attributeName} attribute was null");
 
         return double.Parse(attr);

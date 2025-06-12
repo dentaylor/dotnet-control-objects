@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
@@ -14,7 +15,7 @@ public class ProgressTests : TestBase<Progress>
     }
 
     [TestMethod]
-    public void Value_ReturnsCurrentProgressValue()
+    public async Task Value_ReturnsCurrentProgressValueAsync()
     {
         // Arrange
         var anyValue = 67;
@@ -22,21 +23,21 @@ public class ProgressTests : TestBase<Progress>
         SetValue(anyValue);
 
         // Act
-        var value = ControlObjectOld.Value;
+        var value = await ControlObject.GetValueAsync();
 
         // Assert
         Assert.AreEqual(anyValue, value, "Progress value should be the default value.");
     }
 
     [TestMethod]
-    public void Max_ReturnsMaxProgressValue()
+    public async Task Max_ReturnsMaxProgressValueAsync()
     {
         // Arrange
         var maxValue = 100;
 
         // Act
         // Assert
-        Assert.AreEqual(maxValue, ControlObjectOld.Max);
+        Assert.AreEqual(maxValue, await ControlObject.GetMaxAsync());
     }
 
     [TestMethod]
@@ -46,7 +47,7 @@ public class ProgressTests : TestBase<Progress>
         RemoveAttribute("value");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Value; });
+        Assert.ThrowsExactlyAsync<InvalidOperationException>(async () => { var _ = await ControlObject.GetValueAsync(); });
     }
 
     [TestMethod]
@@ -56,6 +57,6 @@ public class ProgressTests : TestBase<Progress>
         RemoveAttribute("max");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Max; });
+        Assert.ThrowsExactlyAsync<InvalidOperationException>(async () => { var _ = await ControlObject.GetMaxAsync(); });
     }
 }

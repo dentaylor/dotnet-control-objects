@@ -1,14 +1,16 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5;
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5;
 
 public interface IProgress
 {
     /// <summary>
     /// Gets the current value of the progress element.  
     /// </summary>
-    double Value { get; }
+    Task<double> GetValueAsync();
 
     /// <summary>
     /// Gets the maximum value of the progress element. 
     /// </summary>
-    double Max { get; }
+    Task<double> GetMaxAsync();
 }
