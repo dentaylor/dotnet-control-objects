@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
@@ -20,7 +21,7 @@ public class MeterTests : TestBase<Meter>
     }
 
     [TestMethod]
-    public void Value_ReturnsCurrentValue()
+    public async Task Value_ReturnsCurrentValueAsync()
     {
         // Arrange
         var anyValue = 62;
@@ -29,52 +30,52 @@ public class MeterTests : TestBase<Meter>
 
         // Act
         // Assert
-        Assert.AreEqual(ControlObjectOld.Value, anyValue, "Meter value should be the default value.");
+        Assert.AreEqual(await ControlObject.GetValueAsync(), anyValue, "Meter value should be the default value.");
     }
 
     [TestMethod]
-    public void GetMin_ReturnsMinValue()
+    public async Task GetMin_ReturnsMinValueAsync()
     {
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultMin, ControlObjectOld.Min, "Meter min should be the default value.");
+        Assert.AreEqual(defaultMin, await ControlObject.GetMinAsync(), "Meter min should be the default value.");
     }
 
     [TestMethod]
-    public void GetMax_ReturnsMaxValue()
+    public async Task GetMax_ReturnsMaxValueAsync()
     {
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultMax, ControlObjectOld.Max, "Meter max should be the default value.");
+        Assert.AreEqual(defaultMax, await ControlObject.GetMaxAsync(), "Meter max should be the default value.");
     }
 
     [TestMethod]
-    public void GetOptimum_ReturnsOptimumValue()
+    public async Task GetOptimum_ReturnsOptimumValueAsync()
     {
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultOptimum, ControlObjectOld.Optimum, "Meter optimum should be the default value.");
+        Assert.AreEqual(defaultOptimum, await ControlObject.GetOptimumAsync(), "Meter optimum should be the default value.");
     }
 
     [TestMethod]
-    public void GetLow_ReturnsLowValue()
+    public async Task GetLow_ReturnsLowValueAsync()
     {
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultLow, ControlObjectOld.Low, "Meter low should be the default value.");
+        Assert.AreEqual(defaultLow, await ControlObject.GetLowAsync(), "Meter low should be the default value.");
     }
 
     [TestMethod]
-    public void GetHigh_ReturnsHighValue()
+    public async Task GetHigh_ReturnsHighValueAsync()
     {
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultHigh, ControlObjectOld.High, "Meter high should be the default value.");
+        Assert.AreEqual(defaultHigh, await ControlObject.GetHighAsync(), "Meter high should be the default value.");
     }
 
     [TestMethod]
@@ -84,7 +85,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("high");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.High; });
+        Assert.ThrowsExactlyAsync<InvalidOperationException>(async () => { var _ = await ControlObject.GetHighAsync(); });
     }
 
     [TestMethod]
@@ -94,7 +95,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("low");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Low; });
+        Assert.ThrowsExactlyAsync<InvalidOperationException>(async () => { var _ = await ControlObject.GetLowAsync(); });
     }
 
     public void Null_OptimumValue_ThrowsException()
@@ -103,7 +104,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("optimum");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Optimum; });
+        Assert.ThrowsExactlyAsync<InvalidOperationException>(async () => { var _ = await ControlObject.GetOptimumAsync(); });
     }
 
     [TestMethod]
@@ -113,7 +114,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("min");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Min; });
+        Assert.ThrowsExactlyAsync<InvalidOperationException>(async () => { var _ = await ControlObject.GetMinAsync(); });
     }
 
     [TestMethod]
@@ -123,7 +124,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("max");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Max; });
+        Assert.ThrowsExactlyAsync<InvalidOperationException>(async () => { var _ = await ControlObject.GetMaxAsync(); });
     }
 
     [TestMethod]
@@ -133,6 +134,6 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("value");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Value; });
+        Assert.ThrowsExactlyAsync<InvalidOperationException>(async () => { var _ = await ControlObject.GetValueAsync(); });
     }
 }

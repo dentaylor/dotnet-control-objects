@@ -1,24 +1,25 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Cop.Selenium.ControlObjects.Html5;
 
-public class Meter(IWebElement element) : IMeter
+public class Meter(ILocateElements locator) : IMeter
 {
-    public double Value => ParseAttribute("value");
+    public Task<double> GetValueAsync() => ParseAttribute("value");
 
-    public double Min => ParseAttribute("min");
+    public Task<double> GetMinAsync() => ParseAttribute("min");
 
-    public double Max => ParseAttribute("max");
+    public Task<double> GetMaxAsync() => ParseAttribute("max");
 
-    public double Low => ParseAttribute("low");
+    public Task<double> GetLowAsync() => ParseAttribute("low");
 
-    public double High => ParseAttribute("high");
+    public Task<double> GetHighAsync() => ParseAttribute("high");
 
-    public double Optimum => ParseAttribute("optimum");
+    public Task<double> GetOptimumAsync() => ParseAttribute("optimum");
 
-    private double ParseAttribute(string attributeName)
+    private async Task<double> ParseAttribute(string attributeName)
     {
-        var attr = element.GetDomAttribute(attributeName)
+        var attr = await locator.GetDomAttributeAsync(attributeName)
             ?? throw new InvalidOperationException($"{attributeName} attribute was null");
 
         return double.Parse(attr);

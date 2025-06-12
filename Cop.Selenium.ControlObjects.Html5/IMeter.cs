@@ -1,34 +1,36 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5;
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5;
 
 public interface IMeter
 {
     /// <summary>
     /// Gets the value of the meter.
     /// </summary>
-    double Value { get; }
+    Task<double> GetValueAsync();
 
     /// <summary>
     /// Gets the minimum value of the meter.
     /// </summary>
-    double Min { get; }
+    Task<double> GetMinAsync();
 
     /// <summary>
     /// Gets the maximum value of the meter.
     /// </summary>
-    double Max { get; }
+    Task<double> GetMaxAsync();
 
     /// <summary>
     /// Gets the low value of the meter.
     /// </summary>
-    double Low { get; }
+    Task<double> GetLowAsync();
 
     /// <summary>
     /// Gets the high value of the meter. 
     /// </summary>
-    double High { get; }
+    Task<double> GetHighAsync();
 
     /// <summary>
     /// Gets the optimum value of the meter. 
     /// </summary>
-    double Optimum { get; }
+    Task<double> GetOptimumAsync();
 }
