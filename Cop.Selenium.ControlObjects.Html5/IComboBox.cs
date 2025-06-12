@@ -1,14 +1,16 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5;
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5;
 
 public interface IComboBox
 {
     /// <summary>
     /// Sets the text value. 
     /// </summary>
-    void Set(string text);
+    Task SetAsync(string text);
 
     /// <summary>
     /// Gets the selected value.  
     /// </summary>
-    string Selected { get; }
+    Task<string> GetSelectedAsync();
 }

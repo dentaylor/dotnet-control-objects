@@ -1,7 +1,5 @@
 ﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Internal;
 using System;
-using System.Diagnostics;
 
 namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
@@ -16,6 +14,7 @@ namespace Cop.Selenium.ControlObjects.Html5.Tests;
 /// </typeparam>
 public abstract class TestBase<TControlObject>
 {
+    [ThreadStatic]
     private TestRunTimer _runTimer;
 
     // MsTest provides this property.

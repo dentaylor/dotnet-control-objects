@@ -56,6 +56,7 @@ namespace Cop.Selenium.ControlObjects.Html5.Tests
         {
             Console.WriteLine($"Initialization Duration: {InitializationDuration} ms");
             Console.WriteLine($"Cleanup Duration: {CleanupDuration} ms");
+            Console.WriteLine($"Test Duration: {Duration - InitializationDuration - CleanupDuration} ms");
             Console.WriteLine($"Total Time: {Duration} ms");
         }
     }

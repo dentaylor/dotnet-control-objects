@@ -44,5 +44,15 @@ public interface ILocateElements
     /// Checks if the element is selected (e.g., for checkboxes or radio buttons). 
     /// </summary>
     Task<bool> IsSelectedAsync();
+
+    /// <summary>
+    /// Clears the content of the element, such as an input field or textarea. 
+    /// </summary>
+    Task ClearAsync();
+
+    /// <summary>
+    /// Sends a sequence of keystrokes to the element, such as typing text into an input field. 
+    /// </summary>
+    Task SendKeysAsync(string text);
 }
 

@@ -32,4 +32,16 @@ public class SeleniumAdapter(IWebDriver driver, IWebElement element) : ILocateEl
 
     public Task<bool> IsSelectedAsync() =>
         Task.FromResult(element.Selected);
+
+    public Task ClearAsync()
+    {
+        element.Clear();
+        return Task.CompletedTask;
+    }
+
+    public Task SendKeysAsync(string text)
+    {
+        element.SendKeys(text);
+        return Task.CompletedTask;
+    }
 }

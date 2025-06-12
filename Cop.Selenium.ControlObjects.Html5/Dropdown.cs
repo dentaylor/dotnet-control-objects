@@ -1,32 +1,55 @@
-﻿using OpenQA.Selenium.Support.UI;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cop.Selenium.ControlObjects.Html5;
 
-public class Dropdown(IWebElement element) : IDropdown
+public class Dropdown(ILocateElements locator) : IDropdown
 {
-    private SelectElement SelectElement => new(element);
-
-    public string[] Options => [.. SelectElement.Options.Select(o => o.Text)];
-
-    public string Selected => SelectElement.SelectedOption?.Text ?? string.Empty;
-
-    public void Select(string text)
+    public async Task<string[]> GetOptionsAsync()
     {
-        if(string.IsNullOrEmpty(text))
+        var optionElements = await GetOptionElementsAsync();
+        return await Task.WhenAll(optionElements.Select(x => x.GetTextAsync()));
+    }
+
+    public async Task<string> GetSelectedAsync()
+    {
+        var options = await GetOptionElementsAsync();
+        foreach (var option in options)
+        {
+            if (await option.IsSelectedAsync())
+            {
+                return (await option.GetTextAsync()).Trim();
+            }
+        }
+        return null;
+    }
+
+    public async Task SelectAsync(string text)
+    {
+        if (string.IsNullOrEmpty(text))
         {
             return;
         }
 
-        if (Selected == text)
+        var options = await GetOptionElementsAsync();
+
+        foreach (var option in options)
         {
-            return;
+            var optionText = (await option.GetTextAsync()).Trim();
+            if (optionText.Equals(text, StringComparison.OrdinalIgnoreCase))
+            {
+                await option.ClickAsync();
+                return;
+            }
         }
 
-        var match = SelectElement.Options.FirstOrDefault(o => o.Text == text)
-            ?? throw new ArgumentException($"Option '{text}' not found in dropdown.");
+        throw new InvalidOperationException($"Option with text '{text}' not found.");
+    }
 
-        SelectElement.SelectByText(text);
+    public async Task<IEnumerable<ILocateElements>> GetOptionElementsAsync()
+    {
+        return await locator.FindAllAsync("option");
     }
 }

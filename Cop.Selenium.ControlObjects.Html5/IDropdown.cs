@@ -1,20 +1,22 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5
 {
     public interface IDropdown
     {
         /// <summary>
         /// List of all options in the dropdown.
         /// </summary>
-        string[] Options { get; }
+        Task<string[]> GetOptionsAsync();
 
         /// <summary>
         /// Currently selected option.
         /// </summary>
-        string Selected { get; }
-        
+        Task<string> GetSelectedAsync();
+
         /// <summary>
         /// Selects an option by its text.
         /// </summary>
-        void Select(string text);
+        Task SelectAsync(string text);
     }
 }

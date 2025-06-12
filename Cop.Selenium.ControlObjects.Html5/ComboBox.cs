@@ -1,12 +1,17 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5;
+﻿using System.Threading.Tasks;
 
-public class ComboBox(IWebElement element) : IComboBox
+namespace Cop.Selenium.ControlObjects.Html5;
+
+public class ComboBox(ILocateElements locator) : IComboBox
 {
-    public string Selected => element.GetAttribute("value") ?? string.Empty;
-
-    public void Set(string text)
+    public async Task SetAsync(string text)
     {
-        element.Clear();
-        element.SendKeys(text);
+        await locator.ClearAsync();
+        await locator.SendKeysAsync(text);
+    }
+
+    public async Task<string> GetSelectedAsync()
+    {
+        return await locator.GetAttributeAsync("value") ?? string.Empty;
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
@@ -24,16 +25,16 @@ public class DropdownTests : TestBase<Dropdown>
     }
 
     [TestMethod]
-    public void CanGetOptions()
+    public async Task CanGetOptionsAsync()
     {
         // Arrange
         // Act
         // Assert
-        CollectionAssert.AreEqual(_options, ControlObjectOld.Options);
+        CollectionAssert.AreEqual(_options, await ControlObject.GetOptionsAsync());
     }
 
     [TestMethod]
-    public void CanGetSelected()
+    public async Task CanGetSelectedAsync()
     {
         // Arrange
         var currentValue = _options.First();
@@ -42,7 +43,7 @@ public class DropdownTests : TestBase<Dropdown>
 
         // Act
         // Assert
-        Assert.AreEqual(currentValue, ControlObjectOld.Selected);
+        Assert.AreEqual(currentValue, await ControlObject.GetSelectedAsync());
     }
 
     [TestMethod]
@@ -52,20 +53,20 @@ public class DropdownTests : TestBase<Dropdown>
         var toSelect = "Invalid Option";
 
         // Act & Assert
-        Assert.ThrowsExactly<ArgumentException>(() => ControlObjectOld.Select(toSelect));
+        Assert.ThrowsExactlyAsync<ArgumentException>(async () => await ControlObject.SelectAsync(toSelect));
     }
 
     [TestMethod]
-    public void CanGetSelectedWhenNoneSelected()
+    public async Task CanGetSelectedWhenNoneSelectedAsync()
     {
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(DefaultSelectedOption, ControlObjectOld.Selected);
+        Assert.AreEqual(DefaultSelectedOption, await ControlObject.GetSelectedAsync());
     }
 
     [TestMethod]
-    public void CanGetSelectedWhenOptionSelected()
+    public async Task CanGetSelectedWhenOptionSelectedAsync()
     {
         // Arrange
         var toSelect = _options.Skip(1).First();
@@ -74,11 +75,11 @@ public class DropdownTests : TestBase<Dropdown>
 
         // Act
         // Assert
-        Assert.AreEqual(toSelect, ControlObjectOld.Selected);
+        Assert.AreEqual(toSelect, await ControlObject.GetSelectedAsync());
     }
 
     [TestMethod]
-    public void CanSelectAlreadySelectedOption()
+    public async Task CanSelectAlreadySelectedOptionAsync()
     {
         // Arrange
         var toSelect = _options.First();
@@ -86,25 +87,25 @@ public class DropdownTests : TestBase<Dropdown>
         SetViaJs(toSelect);
 
         // Act
-        ControlObjectOld.Select(toSelect);
+        await ControlObject.SelectAsync(toSelect);
 
         // Assert
-        Assert.AreEqual(toSelect, ControlObjectOld.Selected);
+        Assert.AreEqual(toSelect, await ControlObject.GetSelectedAsync());
     }
 
     [TestMethod]
     [DataRow(null)]
     [DataRow("")]
-    public void SelectingNullOrEmptyDoesNothing(string text)
+    public async Task SelectingNullOrEmptyDoesNothingAsync(string text)
     {
         // Arrange
-        var initialSelected = ControlObjectOld.Selected;
+        var initialSelected = await ControlObject.GetSelectedAsync();
 
         // Act
-        ControlObjectOld.Select(text);
+        await ControlObject.SelectAsync(text);
 
         // Assert
-        Assert.AreEqual(initialSelected, ControlObjectOld.Selected);
+        Assert.AreEqual(initialSelected, await ControlObject.GetSelectedAsync());
     }
 
     private void SetViaJs(string value)
