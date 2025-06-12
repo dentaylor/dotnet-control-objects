@@ -1,38 +1,79 @@
-﻿using OpenQA.Selenium.Support.UI;
-using System;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cop.Selenium.ControlObjects.Html5;
 
-public class MultiDropdown(IWebElement element) : IMultiDropdown
+public class MultiDropdown(ILocateElements locator) : IMultiDropdown
 {
-    private SelectElement SelectElement => new(element);
-
-    public string[] Selected => [.. SelectElement.AllSelectedOptions.Select(option => option.Text)];
-
-    public string[] Options => [.. SelectElement.Options.Select(x => x.Text)];
-
-    public void Select(params string[] texts)
+    public async Task ClearAsync()
     {
-        if (texts == null || texts.Length == 0)
+        var options = await GetOptionElementsAsync();
+        foreach (var option in options)
         {
-            return;
-        }
-
-        var missingOptions = texts.Except(Options).ToArray();
-        if (missingOptions.Length > 0)
-        {
-            throw new ArgumentException($"Options not found: {string.Join(", ", missingOptions)}");
-        }
-
-        foreach (var text in texts)
-        {
-            SelectElement.SelectByText(text);
+            if (await option.IsSelectedAsync())
+            {
+                await option.ClickAsync();
+            }
         }
     }
 
-    public void Clear()
+    public async Task<string[]> GetOptionsAsync()
     {
-        SelectElement.DeselectAll();
+        var options = await GetOptionElementsAsync();
+        var texts = new List<string>();
+
+        foreach (var option in options)
+        {
+            var text = await option.GetTextAsync();
+            texts.Add(text.Trim());
+        }
+        return [.. texts];
+    }
+
+    public async Task<string[]> GetSelectedAsync()
+    {
+        var selectedOptions = new List<string>();
+
+        var options = await GetOptionElementsAsync();
+        foreach (var option in options)
+        {
+            if (await option.IsSelectedAsync())
+            {
+                selectedOptions.Add((await option.GetTextAsync()).Trim());
+            }
+        }
+        return [.. selectedOptions];
+    }
+
+    public async Task SelectAsync(params string[] texts)
+    {
+        foreach (var text in texts)
+        {
+            await SelectAsync(text);
+        }
+    }
+
+    private async Task SelectAsync(string text)
+    {
+        var options = await GetOptionElementsAsync();
+        foreach (var option in options)
+        {
+            var optionText = (await option.GetTextAsync()).Trim();
+            if (optionText.Equals(text, StringComparison.OrdinalIgnoreCase))
+            {
+                if (!await option.IsSelectedAsync())
+                {
+                    await option.ClickAsync();
+                }
+                return;
+            }
+        }
+        throw new InvalidOperationException($"Option with text '{text}' not found.");
+    }
+
+    private async Task<IEnumerable<ILocateElements>> GetOptionElementsAsync()
+    {
+        return await locator.FindAllAsync("option");
     }
 }

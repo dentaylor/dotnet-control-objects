@@ -34,7 +34,6 @@ public class Dropdown(ILocateElements locator) : IDropdown
         }
 
         var options = await GetOptionElementsAsync();
-
         foreach (var option in options)
         {
             var optionText = (await option.GetTextAsync()).Trim();

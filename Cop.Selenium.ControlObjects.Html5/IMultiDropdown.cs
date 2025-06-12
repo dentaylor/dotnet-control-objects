@@ -1,24 +1,26 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5;
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5;
 
 public interface IMultiDropdown
 {
     /// <summary>
     /// Selects the specified options by their visible text. 
     /// </summary>
-    void Select(params string[] texts);
+    Task SelectAsync(params string[] texts);
 
     /// <summary>
     /// Gets the currently selected options' visible text. 
     /// </summary>
-    string[] Selected { get; }
+    Task<string[]> GetSelectedAsync();
 
     /// <summary>
     /// Gets all available options' visible text. 
     /// </summary>
-    string[] Options { get; }
+    Task<string[]> GetOptionsAsync();
 
     /// <summary>
     /// Clears all selected options. 
     /// </summary>
-    void Clear();
+    Task ClearAsync();
 }

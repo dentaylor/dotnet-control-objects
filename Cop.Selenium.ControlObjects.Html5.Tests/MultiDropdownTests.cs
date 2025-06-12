@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
@@ -17,7 +18,9 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         "Option 5"
     ];
 
-    protected override By Locator => By.Id("SelectedOptions");
+    protected override By Locator => By.Id(ElementId);
+
+    private string ElementId = "SelectedOptions";
 
     [TestInitialize]
     public void Init()
@@ -26,37 +29,37 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
     }
 
     [TestMethod]
-    public void Select_SelectsMultipleOptions()
+    public async Task Select_SelectsMultipleOptionsAsync()
     {
         // Arrange
         var values = DefaultOptions.Take(2).ToArray();
 
         // Act
-        ControlObjectOld.Select(values);
+        await ControlObject.SelectAsync(values);
 
         // Assert
-        CollectionAssert.AreEquivalent(values, ControlObjectOld.Selected);
+        CollectionAssert.AreEquivalent(values, await ControlObject.GetSelectedAsync());
     }
 
     [TestMethod]
-    public void Select_Multiple_WhenSomeAlreadySelected()
+    public async Task Select_Multiple_WhenSomeAlreadyGetSelectedAsync()
     {
         // Arrange
         var initialOptions = DefaultOptions.Skip(2).Take(2);
         var newOptions = DefaultOptions.Take(2).ToArray();
         var allOptions = initialOptions.Concat(newOptions).ToArray();
-        
+
         SetDropdownValue(initialOptions);
-        
+
         // Act
-        ControlObjectOld.Select(newOptions);
-        
+        await ControlObject.SelectAsync(newOptions);
+
         // Assert
-        CollectionAssert.AreEquivalent(allOptions, ControlObjectOld.Selected);
+        CollectionAssert.AreEquivalent(allOptions, await ControlObject.GetSelectedAsync());
     }
 
     [TestMethod]
-    public void Selected_ReturnsCurrentlySelectedOptions()
+    public async Task GetSelectedAsync()
     {
         // Arrange
         var options = DefaultOptions.Skip(2).Take(2);
@@ -64,14 +67,14 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         SetDropdownValue(options);
 
         // Act
-        var selected = ControlObjectOld.Selected;
+        var selected = await ControlObject.GetSelectedAsync();
 
         // Assert
         CollectionAssert.AreEquivalent(options.ToArray(), selected);
     }
 
     [TestMethod]
-    public void Select_AddsToCurrentSelection()
+    public async Task Select_AddsToCurrentSelectionAsync()
     {
         // Arrange
         var currentOptions = DefaultOptions.Skip(2).Take(2);
@@ -81,10 +84,10 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         SetDropdownValue(currentOptions);
 
         // Act
-        ControlObjectOld.Select(options);
+        await ControlObject.SelectAsync(options);
 
         // Assert
-        CollectionAssert.AreEquivalent(allOptions, ControlObjectOld.Selected);
+        CollectionAssert.AreEquivalent(allOptions, await ControlObject.GetSelectedAsync());
     }
 
     [TestMethod]
@@ -94,31 +97,31 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         var values = new[] { "AnyValue" };
 
         // Act & Assert
-        _ = Assert.ThrowsExactly<ArgumentException>(() => ControlObjectOld.Select(values));
+        _ = Assert.ThrowsExactlyAsync<ArgumentException>(() => ControlObject.SelectAsync(values));
     }
 
     [TestMethod]
-    public void Can_GetOptions()
+    public async Task Can_GetOptions()
     {
         // Arrange
         // Act
         // Assert
-        CollectionAssert.AreEquivalent(DefaultOptions.ToArray(), ControlObjectOld.Options);
+        CollectionAssert.AreEquivalent(DefaultOptions.ToArray(), await ControlObject.GetOptionsAsync());
     }
 
     [TestMethod]
-    public void Can_GetOptions_WhenNonePresent_ReturnsEmptyCollection()
+    public async Task Can_GetOptions_WhenNonePresent_ReturnsEmptyCollectionAsync()
     {
         // Arrange  
-        ExecuteScript("document.getElementById('SelectedOptions').innerHTML = ''");
+        ExecuteScript($"document.getElementById('{ElementId}').innerHTML = ''");
 
         // Act  
         // Assert  
-        CollectionAssert.AreEquivalent(Array.Empty<string>(), ControlObjectOld.Options);
+        CollectionAssert.AreEquivalent(Array.Empty<string>(), await ControlObject.GetOptionsAsync());
     }
 
     [TestMethod]
-    public void Clear_Deselects_All()
+    public async Task Clear_Deselects_AllAsync()
     {
         // Arrange
         var options = DefaultOptions.Take(2);
@@ -126,10 +129,11 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         SetDropdownValue(options);
 
         // Act
-        ControlObjectOld.Clear();
+        await ControlObject.ClearAsync();
 
         // Assert
-        Assert.IsFalse(ControlObjectOld.Selected.Any());
+        var selected = await ControlObject.GetSelectedAsync();
+        Assert.AreEqual(0, selected.Length);
     }
 
     private void SetDropdownValue(IEnumerable<string> values)
@@ -138,7 +142,7 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         actions.KeyDown(Keys.Control);
         foreach (var value in values)
         {
-            var option = Driver.FindElement(By.XPath($"//select[@id='SelectedOptions']/option[text()='{value}']"));
+            var option = Driver.FindElement(By.XPath($"//select[@id='{ElementId}']/option[text()='{value}']"));
             actions.Click(option);
         }
         actions.KeyUp(Keys.Control);
