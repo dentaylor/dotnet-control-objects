@@ -1,4 +1,6 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5.Tests;
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 [TestClass]
 public class TextareaTests : TestBase<Textarea>
@@ -12,20 +14,20 @@ public class TextareaTests : TestBase<Textarea>
     }
 
     [TestMethod]
-    public void Set_ChangesTextareaValue()
+    public async Task Set_ChangesTextareaValueAsync()
     {
         // Arrange
         var text = "Multiline\r\nText";
 
         // Act
-        ControlObjectOld.Set(text);
+        await ControlObject.SetAsync(text);
 
         // Assert
-        Assert.AreEqual(text, ControlObjectOld.Text);
+        Assert.AreEqual(text, await ControlObject.GetTextAsync());
     }
 
     [TestMethod]
-    public void Value_ReturnsCurrentText()
+    public async Task Value_ReturnsCurrentTextAsync()
     {
         // Arrange
         var text = "Multiline\r\nText";
@@ -33,10 +35,10 @@ public class TextareaTests : TestBase<Textarea>
         SetTextareaValue(text);
 
         // Act
-        var value = ControlObjectOld.Text;
+        var value = ControlObject.GetTextAsync();
 
         // Assert
-        Assert.AreEqual(text, value);
+        Assert.AreEqual(text, await value);
     }
 
     private void SetTextareaValue(string text)

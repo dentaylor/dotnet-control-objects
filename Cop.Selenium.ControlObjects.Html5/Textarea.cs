@@ -1,19 +1,20 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Cop.Selenium.ControlObjects.Html5;
 
-public class Textarea(IWebElement element) : ITextarea
+public class Textarea(ILocateElements locator) : ITextarea
 {
     public virtual TimeSpan SetTimeout => TimeSpan.FromSeconds(5);
 
-    public string Text => element.GetAttribute("value") ?? string.Empty;
+    public async Task<string> GetTextAsync() => await locator.GetAttributeAsync("value") ?? string.Empty;
 
-    public void Set(string text)
+    public async Task SetAsync(string text)
     {
-        element.Clear();
-        element.SendKeys(text);
+        await locator.ClearAsync();
+        await locator.SendKeysAsync(text);
 
-        var isSet = () => Text == text;
-        isSet.WaitUntilTrue(SetTimeout, $"Could not set text to '{text}' within the timeout. Actual value was '{Text}'");
+        Func<bool> isSet = () => Task.Run(async () => await GetTextAsync() == text).Result;
+        isSet.WaitUntilTrue(SetTimeout, $"Could not set text to '{text}' within the timeout. Actual value was '{await GetTextAsync()}'");
     }
 }

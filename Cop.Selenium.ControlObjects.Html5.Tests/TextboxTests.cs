@@ -1,4 +1,6 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5.Tests;
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 [TestClass]
 public class TextboxTests : TestBase<Textbox>
@@ -12,20 +14,20 @@ public class TextboxTests : TestBase<Textbox>
     }
 
     [TestMethod]
-    public void CanSetText()
+    public async Task CanSetTextAsync()
     {
         // Arrange
         var text = "some text";
 
         // Act
-        ControlObjectOld.Set(text);
+        await ControlObject.SetAsync(text);
 
         // Assert
-        Assert.AreEqual(text, ControlObjectOld.Text);
+        Assert.AreEqual(text, await ControlObject.GetTextAsync());
     }
 
     [TestMethod]
-    public void CanGetText()
+    public async Task CanGetTextAsync()
     {
         // Arrange
         var text = "some text";
@@ -33,14 +35,14 @@ public class TextboxTests : TestBase<Textbox>
         SetTextValue(text);
 
         // Act
-        var result = ControlObjectOld.Text;
+        var result = await ControlObject.GetTextAsync();
 
         // Assert
         Assert.AreEqual(text, result);
     }
 
     [TestMethod]
-    public void Clears_Before_SettingText()
+    public async Task Clears_Before_SettingTextAsync()
     {
         // Arrange
         var oldText = "some text";
@@ -49,10 +51,10 @@ public class TextboxTests : TestBase<Textbox>
         SetTextValue(oldText);
 
         // Act
-        ControlObjectOld.Set(text);
-        
+        await ControlObject.SetAsync(text);
+
         // Assert
-        Assert.AreEqual(text, ControlObjectOld.Text);
+        Assert.AreEqual(text, await ControlObject.GetTextAsync());
     }
 
     private void SetTextValue(string text)
