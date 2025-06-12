@@ -1,19 +1,24 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5;
+﻿using System.Threading.Tasks;
 
-public class Checkbox(IWebElement element) : ICheckbox
+namespace Cop.Selenium.ControlObjects.Html5;
+
+public class Checkbox(ILocateElements locator) : ICheckbox
 {
-    public bool IsChecked => element.Selected;
-
-    public void Set(bool? isChecked)
+    public async Task<bool> IsCheckedAsync()
     {
-        if(isChecked == null)
+        return await locator.IsSelectedAsync();
+    }
+
+    public async Task SetAsync(bool? isChecked)
+    {
+        if (isChecked == null)
         {
             return;
         }
 
-        if (!element.Selected != IsChecked)
+        if (await locator.IsSelectedAsync() != isChecked)
         {
-            element.Click();
+            await locator.ClickAsync();
         }
     }
 }

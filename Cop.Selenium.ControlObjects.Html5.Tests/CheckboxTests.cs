@@ -1,4 +1,6 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5.Tests;
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 [TestClass]
 public class CheckboxTests : TestBase<Checkbox>
@@ -12,20 +14,20 @@ public class CheckboxTests : TestBase<Checkbox>
     }
 
     [TestMethod]
-    public void Toggles_When_Set_True()
+    public async Task Toggles_When_Set_TrueAsync()
     {
         // Arrange
         var isChecked = true;
 
         // Act
-        ControlObjectOld.Set(isChecked);
+        await ControlObject.SetAsync(isChecked);
 
         // Assert
-        Assert.AreEqual(isChecked, ControlObjectOld.IsChecked);
+        Assert.AreEqual(isChecked, await ControlObject.IsCheckedAsync());
     }
 
     [TestMethod]
-    public void Toggles_When_Set_False()
+    public async Task Toggles_When_Set_FalseAsync()
     {
         // Arrange
         var isChecked = false;
@@ -34,14 +36,14 @@ public class CheckboxTests : TestBase<Checkbox>
         SetCheckboxState(initialIsChecked);
 
         // Act
-        ControlObjectOld.Set(isChecked);
+        await ControlObject.SetAsync(isChecked);
 
         // Assert
-        Assert.AreEqual(isChecked, ControlObjectOld.IsChecked);
+        Assert.AreEqual(isChecked, await ControlObject.IsCheckedAsync());
     }
 
     [TestMethod]
-    public void NoOp_When_Null()
+    public async Task NoOp_When_NullAsync()
     {
         // Arrange
         bool? isChecked = null;
@@ -50,10 +52,10 @@ public class CheckboxTests : TestBase<Checkbox>
         SetCheckboxState(initialIsChecked);
 
         // Act
-        ControlObjectOld.Set(isChecked);
+        await ControlObject.SetAsync(isChecked);
 
         // Assert
-        Assert.AreEqual(initialIsChecked, ControlObjectOld.IsChecked);
+        Assert.AreEqual(initialIsChecked, await ControlObject.IsCheckedAsync());
     }
 
     private void SetCheckboxState(bool isChecked)

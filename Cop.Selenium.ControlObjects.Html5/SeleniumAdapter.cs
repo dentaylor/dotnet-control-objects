@@ -21,7 +21,7 @@ public class SeleniumAdapter(IWebDriver driver, IWebElement element) : ILocateEl
         return Task.CompletedTask;
     }
 
-    public Task<string> GetTextAsync() => 
+    public Task<string> GetTextAsync() =>
         Task.FromResult(element.Text);
 
     public Task<string> GetAttributeAsync(string attribute) =>
@@ -29,4 +29,7 @@ public class SeleniumAdapter(IWebDriver driver, IWebElement element) : ILocateEl
 
     public Task<string> GetDomAttributeAsync(string attribute) =>
         Task.FromResult(element.GetDomAttribute(attribute));
+
+    public Task<bool> IsSelectedAsync() =>
+        Task.FromResult(element.Selected);
 }

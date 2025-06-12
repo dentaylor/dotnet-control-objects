@@ -39,5 +39,10 @@ public interface ILocateElements
     /// Asynchronously retrieves the value of a DOM attribute from the element.
     /// </summary>
     Task<string> GetDomAttributeAsync(string attribute);
+
+    /// <summary>
+    /// Checks if the element is selected (e.g., for checkboxes or radio buttons). 
+    /// </summary>
+    Task<bool> IsSelectedAsync();
 }
 
