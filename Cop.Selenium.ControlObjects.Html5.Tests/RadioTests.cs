@@ -1,4 +1,6 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5.Tests;
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 [TestClass]
 public class RadioTests : TestBase<Radio>
@@ -12,24 +14,24 @@ public class RadioTests : TestBase<Radio>
     }
 
     [TestMethod]
-    public void Set_True_SelectsRadioButton()
+    public async Task Set_True_SelectsRadioButtonAsync()
     {
         // Arrange
         // Act
-        ControlObjectOld.Click();
+        await ControlObject.ClickAsync();
 
         // Assert
-        Assert.IsTrue(ControlObjectOld.IsSet);
+        Assert.IsTrue(await ControlObject.IsSetAsync());
     }
 
     [TestMethod]
-    public void IsSet_ReturnsFalse_WhenRadioButtonNotSelected()
+    public async Task IsSet_ReturnsFalse_WhenRadioButtonNotSelectedAsync()
     {
         // Arrange
         var defaultState = false;
 
         // Act      
         // Assert
-        Assert.AreEqual(defaultState, ControlObjectOld.IsSet);
+        Assert.AreEqual(defaultState, await ControlObject.IsSetAsync());
     }
 }

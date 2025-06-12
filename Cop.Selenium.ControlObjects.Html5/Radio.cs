@@ -1,11 +1,13 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5;
+﻿using System.Threading.Tasks;
 
-public class Radio(IWebElement element) : IRadio
+namespace Cop.Selenium.ControlObjects.Html5;
+
+public class Radio(ILocateElements locator) : IRadio
 {
-    public bool IsSet => element.Selected;
+    public async Task<bool> IsSetAsync() => await locator.IsSelectedAsync();
 
-    public void Click()
+    public async Task ClickAsync()
     {
-        element.Click();
+        await locator.ClickAsync();
     }
 }
