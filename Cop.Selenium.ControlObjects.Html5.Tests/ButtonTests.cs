@@ -1,4 +1,6 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5.Tests;
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
 [TestClass]
 public class ButtonTests : TestBase<Button>
@@ -12,11 +14,11 @@ public class ButtonTests : TestBase<Button>
     }
 
     [TestMethod]
-    public void ClickButton()
+    public async Task ClickButtonAsync()
     {
         // Arrange
         // Act
-        ControlObject.Click();
+        await ControlObject.ClickAsync();
 
         // Assert
         var text = Driver.FindElement(By.CssSelector(".alert")).Text;

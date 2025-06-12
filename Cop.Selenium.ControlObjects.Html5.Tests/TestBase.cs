@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Internal;
 using System;
+using System.Diagnostics;
 
 namespace Cop.Selenium.ControlObjects.Html5.Tests;
 
@@ -14,6 +16,8 @@ namespace Cop.Selenium.ControlObjects.Html5.Tests;
 /// </typeparam>
 public abstract class TestBase<TControlObject>
 {
+    private TestRunTimer _runTimer;
+
     // MsTest provides this property.
     public TestContext TestContext { get; set; }
 
@@ -22,7 +26,18 @@ public abstract class TestBase<TControlObject>
 
     protected IWebDriver Driver { get; set; }
 
-    protected TControlObject ControlObject => (TControlObject)Activator.CreateInstance(typeof(TControlObject), Driver.FindElement(Locator));
+    protected TControlObject ControlObjectOld => (TControlObject)Activator.CreateInstance(typeof(TControlObject), Driver.FindElement(Locator));
+
+    protected TControlObject ControlObject
+    {
+        get
+        {
+            var rootElement = Driver.FindElement(Locator);
+            var adapter = new SeleniumAdapter(Driver, rootElement);
+            var controlObject = Activator.CreateInstance(typeof(TControlObject), adapter);
+            return (TControlObject)controlObject;
+        }
+    }
 
     /// <summary>
     /// Sets up the test environment. 
@@ -36,6 +51,9 @@ public abstract class TestBase<TControlObject>
     /// </param>
     public void LaunchAndNavigateToPage(string page)
     {
+        _runTimer = TestRunTimer.StartNew();
+        _runTimer.InitializationStart();
+
         var url = TestContext.Properties["autUrl"]?.ToString()
             ?? throw new InvalidOperationException("The 'autUrl' property is not set. Ensure that a runsettings file is selected.");
 
@@ -44,16 +62,24 @@ public abstract class TestBase<TControlObject>
         Driver.Manage().Window.Maximize();
 
         Driver.Navigate().GoToUrl(url + page);
+
+        _runTimer.InitializationStop();
     }
 
     [TestCleanup]
     public void Cleanup()
     {
+        _runTimer.CleanupStart();
+
         // This allows for inspection of the browser state when a test fails.
         if (TestContext.CurrentTestOutcome == UnitTestOutcome.Passed)
         {
             Driver?.Quit();
         }
+
+        _runTimer.CleanupStop();
+        _runTimer.Stop();
+        _runTimer.WriteToConsole();
     }
 
     /// <summary>

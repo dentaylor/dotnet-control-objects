@@ -1,9 +1,11 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5;
+﻿using System.Threading.Tasks;
 
-public class Button(IWebElement element) : IButton
+namespace Cop.Selenium.ControlObjects.Html5;
+
+public class Button(ILocateElements locator) : IButton
 {
-    public void Click()
+    public async Task ClickAsync()
     {
-        element.Click();
+        await locator.ClickAsync();
     }
 }

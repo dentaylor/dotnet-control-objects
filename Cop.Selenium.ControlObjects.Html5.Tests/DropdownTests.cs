@@ -29,7 +29,7 @@ public class DropdownTests : TestBase<Dropdown>
         // Arrange
         // Act
         // Assert
-        CollectionAssert.AreEqual(_options, ControlObject.Options);
+        CollectionAssert.AreEqual(_options, ControlObjectOld.Options);
     }
 
     [TestMethod]
@@ -42,7 +42,7 @@ public class DropdownTests : TestBase<Dropdown>
 
         // Act
         // Assert
-        Assert.AreEqual(currentValue, ControlObject.Selected);
+        Assert.AreEqual(currentValue, ControlObjectOld.Selected);
     }
 
     [TestMethod]
@@ -52,7 +52,7 @@ public class DropdownTests : TestBase<Dropdown>
         var toSelect = "Invalid Option";
 
         // Act & Assert
-        Assert.ThrowsExactly<ArgumentException>(() => ControlObject.Select(toSelect));
+        Assert.ThrowsExactly<ArgumentException>(() => ControlObjectOld.Select(toSelect));
     }
 
     [TestMethod]
@@ -61,7 +61,7 @@ public class DropdownTests : TestBase<Dropdown>
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(DefaultSelectedOption, ControlObject.Selected);
+        Assert.AreEqual(DefaultSelectedOption, ControlObjectOld.Selected);
     }
 
     [TestMethod]
@@ -74,7 +74,7 @@ public class DropdownTests : TestBase<Dropdown>
 
         // Act
         // Assert
-        Assert.AreEqual(toSelect, ControlObject.Selected);
+        Assert.AreEqual(toSelect, ControlObjectOld.Selected);
     }
 
     [TestMethod]
@@ -86,10 +86,10 @@ public class DropdownTests : TestBase<Dropdown>
         SetViaJs(toSelect);
 
         // Act
-        ControlObject.Select(toSelect);
+        ControlObjectOld.Select(toSelect);
 
         // Assert
-        Assert.AreEqual(toSelect, ControlObject.Selected);
+        Assert.AreEqual(toSelect, ControlObjectOld.Selected);
     }
 
     [TestMethod]
@@ -98,13 +98,13 @@ public class DropdownTests : TestBase<Dropdown>
     public void SelectingNullOrEmptyDoesNothing(string text)
     {
         // Arrange
-        var initialSelected = ControlObject.Selected;
+        var initialSelected = ControlObjectOld.Selected;
 
         // Act
-        ControlObject.Select(text);
+        ControlObjectOld.Select(text);
 
         // Assert
-        Assert.AreEqual(initialSelected, ControlObject.Selected);
+        Assert.AreEqual(initialSelected, ControlObjectOld.Selected);
     }
 
     private void SetViaJs(string value)

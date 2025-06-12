@@ -16,10 +16,10 @@ public class RadioTests : TestBase<Radio>
     {
         // Arrange
         // Act
-        ControlObject.Click();
+        ControlObjectOld.Click();
 
         // Assert
-        Assert.IsTrue(ControlObject.IsSet);
+        Assert.IsTrue(ControlObjectOld.IsSet);
     }
 
     [TestMethod]
@@ -30,6 +30,6 @@ public class RadioTests : TestBase<Radio>
 
         // Act      
         // Assert
-        Assert.AreEqual(defaultState, ControlObject.IsSet);
+        Assert.AreEqual(defaultState, ControlObjectOld.IsSet);
     }
 }

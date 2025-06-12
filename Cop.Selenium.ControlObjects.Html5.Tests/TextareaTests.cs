@@ -18,10 +18,10 @@ public class TextareaTests : TestBase<Textarea>
         var text = "Multiline\r\nText";
 
         // Act
-        ControlObject.Set(text);
+        ControlObjectOld.Set(text);
 
         // Assert
-        Assert.AreEqual(text, ControlObject.Text);
+        Assert.AreEqual(text, ControlObjectOld.Text);
     }
 
     [TestMethod]
@@ -33,7 +33,7 @@ public class TextareaTests : TestBase<Textarea>
         SetTextareaValue(text);
 
         // Act
-        var value = ControlObject.Text;
+        var value = ControlObjectOld.Text;
 
         // Assert
         Assert.AreEqual(text, value);

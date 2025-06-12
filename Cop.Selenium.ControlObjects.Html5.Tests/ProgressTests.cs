@@ -22,7 +22,7 @@ public class ProgressTests : TestBase<Progress>
         SetValue(anyValue);
 
         // Act
-        var value = ControlObject.Value;
+        var value = ControlObjectOld.Value;
 
         // Assert
         Assert.AreEqual(anyValue, value, "Progress value should be the default value.");
@@ -36,7 +36,7 @@ public class ProgressTests : TestBase<Progress>
 
         // Act
         // Assert
-        Assert.AreEqual(maxValue, ControlObject.Max);
+        Assert.AreEqual(maxValue, ControlObjectOld.Max);
     }
 
     [TestMethod]
@@ -46,7 +46,7 @@ public class ProgressTests : TestBase<Progress>
         RemoveAttribute("value");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.Value; });
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Value; });
     }
 
     [TestMethod]
@@ -56,6 +56,6 @@ public class ProgressTests : TestBase<Progress>
         RemoveAttribute("max");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.Max; });
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Max; });
     }
 }

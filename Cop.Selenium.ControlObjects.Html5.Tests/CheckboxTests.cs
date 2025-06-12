@@ -18,10 +18,10 @@ public class CheckboxTests : TestBase<Checkbox>
         var isChecked = true;
 
         // Act
-        ControlObject.Set(isChecked);
+        ControlObjectOld.Set(isChecked);
 
         // Assert
-        Assert.AreEqual(isChecked, ControlObject.IsChecked);
+        Assert.AreEqual(isChecked, ControlObjectOld.IsChecked);
     }
 
     [TestMethod]
@@ -34,10 +34,10 @@ public class CheckboxTests : TestBase<Checkbox>
         SetCheckboxState(initialIsChecked);
 
         // Act
-        ControlObject.Set(isChecked);
+        ControlObjectOld.Set(isChecked);
 
         // Assert
-        Assert.AreEqual(isChecked, ControlObject.IsChecked);
+        Assert.AreEqual(isChecked, ControlObjectOld.IsChecked);
     }
 
     [TestMethod]
@@ -50,10 +50,10 @@ public class CheckboxTests : TestBase<Checkbox>
         SetCheckboxState(initialIsChecked);
 
         // Act
-        ControlObject.Set(isChecked);
+        ControlObjectOld.Set(isChecked);
 
         // Assert
-        Assert.AreEqual(initialIsChecked, ControlObject.IsChecked);
+        Assert.AreEqual(initialIsChecked, ControlObjectOld.IsChecked);
     }
 
     private void SetCheckboxState(bool isChecked)

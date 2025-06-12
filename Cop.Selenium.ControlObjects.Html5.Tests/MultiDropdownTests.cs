@@ -32,10 +32,10 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         var values = DefaultOptions.Take(2).ToArray();
 
         // Act
-        ControlObject.Select(values);
+        ControlObjectOld.Select(values);
 
         // Assert
-        CollectionAssert.AreEquivalent(values, ControlObject.Selected);
+        CollectionAssert.AreEquivalent(values, ControlObjectOld.Selected);
     }
 
     [TestMethod]
@@ -49,10 +49,10 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         SetDropdownValue(initialOptions);
         
         // Act
-        ControlObject.Select(newOptions);
+        ControlObjectOld.Select(newOptions);
         
         // Assert
-        CollectionAssert.AreEquivalent(allOptions, ControlObject.Selected);
+        CollectionAssert.AreEquivalent(allOptions, ControlObjectOld.Selected);
     }
 
     [TestMethod]
@@ -64,7 +64,7 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         SetDropdownValue(options);
 
         // Act
-        var selected = ControlObject.Selected;
+        var selected = ControlObjectOld.Selected;
 
         // Assert
         CollectionAssert.AreEquivalent(options.ToArray(), selected);
@@ -81,10 +81,10 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         SetDropdownValue(currentOptions);
 
         // Act
-        ControlObject.Select(options);
+        ControlObjectOld.Select(options);
 
         // Assert
-        CollectionAssert.AreEquivalent(allOptions, ControlObject.Selected);
+        CollectionAssert.AreEquivalent(allOptions, ControlObjectOld.Selected);
     }
 
     [TestMethod]
@@ -94,7 +94,7 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         var values = new[] { "AnyValue" };
 
         // Act & Assert
-        _ = Assert.ThrowsExactly<ArgumentException>(() => ControlObject.Select(values));
+        _ = Assert.ThrowsExactly<ArgumentException>(() => ControlObjectOld.Select(values));
     }
 
     [TestMethod]
@@ -103,7 +103,7 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         // Arrange
         // Act
         // Assert
-        CollectionAssert.AreEquivalent(DefaultOptions.ToArray(), ControlObject.Options);
+        CollectionAssert.AreEquivalent(DefaultOptions.ToArray(), ControlObjectOld.Options);
     }
 
     [TestMethod]
@@ -114,7 +114,7 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
 
         // Act  
         // Assert  
-        CollectionAssert.AreEquivalent(Array.Empty<string>(), ControlObject.Options);
+        CollectionAssert.AreEquivalent(Array.Empty<string>(), ControlObjectOld.Options);
     }
 
     [TestMethod]
@@ -126,10 +126,10 @@ public class MultiDropdownTests : TestBase<MultiDropdown>
         SetDropdownValue(options);
 
         // Act
-        ControlObject.Clear();
+        ControlObjectOld.Clear();
 
         // Assert
-        Assert.IsFalse(ControlObject.Selected.Any());
+        Assert.IsFalse(ControlObjectOld.Selected.Any());
     }
 
     private void SetDropdownValue(IEnumerable<string> values)

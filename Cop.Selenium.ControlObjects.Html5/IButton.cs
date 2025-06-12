@@ -1,10 +1,12 @@
-﻿namespace Cop.Selenium.ControlObjects.Html5
+﻿using System.Threading.Tasks;
+
+namespace Cop.Selenium.ControlObjects.Html5
 {
     public interface IButton
     {
         /// <summary>
-        /// Clicks the button.   
+        /// Asynchronously clicks the button.   
         /// </summary>
-        void Click();
+        Task ClickAsync();
     }
 }

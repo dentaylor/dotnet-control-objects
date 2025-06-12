@@ -29,7 +29,7 @@ public class MeterTests : TestBase<Meter>
 
         // Act
         // Assert
-        Assert.AreEqual(ControlObject.Value, anyValue, "Meter value should be the default value.");
+        Assert.AreEqual(ControlObjectOld.Value, anyValue, "Meter value should be the default value.");
     }
 
     [TestMethod]
@@ -38,7 +38,7 @@ public class MeterTests : TestBase<Meter>
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultMin, ControlObject.Min, "Meter min should be the default value.");
+        Assert.AreEqual(defaultMin, ControlObjectOld.Min, "Meter min should be the default value.");
     }
 
     [TestMethod]
@@ -47,7 +47,7 @@ public class MeterTests : TestBase<Meter>
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultMax, ControlObject.Max, "Meter max should be the default value.");
+        Assert.AreEqual(defaultMax, ControlObjectOld.Max, "Meter max should be the default value.");
     }
 
     [TestMethod]
@@ -56,7 +56,7 @@ public class MeterTests : TestBase<Meter>
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultOptimum, ControlObject.Optimum, "Meter optimum should be the default value.");
+        Assert.AreEqual(defaultOptimum, ControlObjectOld.Optimum, "Meter optimum should be the default value.");
     }
 
     [TestMethod]
@@ -65,7 +65,7 @@ public class MeterTests : TestBase<Meter>
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultLow, ControlObject.Low, "Meter low should be the default value.");
+        Assert.AreEqual(defaultLow, ControlObjectOld.Low, "Meter low should be the default value.");
     }
 
     [TestMethod]
@@ -74,7 +74,7 @@ public class MeterTests : TestBase<Meter>
         // Arrange
         // Act
         // Assert
-        Assert.AreEqual(defaultHigh, ControlObject.High, "Meter high should be the default value.");
+        Assert.AreEqual(defaultHigh, ControlObjectOld.High, "Meter high should be the default value.");
     }
 
     [TestMethod]
@@ -84,7 +84,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("high");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.High; });
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.High; });
     }
 
     [TestMethod]
@@ -94,7 +94,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("low");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.Low; });
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Low; });
     }
 
     public void Null_OptimumValue_ThrowsException()
@@ -103,7 +103,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("optimum");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.Optimum; });
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Optimum; });
     }
 
     [TestMethod]
@@ -113,7 +113,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("min");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.Min; });
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Min; });
     }
 
     [TestMethod]
@@ -123,7 +123,7 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("max");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.Max; });
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Max; });
     }
 
     [TestMethod]
@@ -133,6 +133,6 @@ public class MeterTests : TestBase<Meter>
         RemoveAttribute("value");
 
         // Act & Assert
-        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObject.Value; });
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var _ = ControlObjectOld.Value; });
     }
 }

@@ -18,10 +18,10 @@ public class TextboxTests : TestBase<Textbox>
         var text = "some text";
 
         // Act
-        ControlObject.Set(text);
+        ControlObjectOld.Set(text);
 
         // Assert
-        Assert.AreEqual(text, ControlObject.Text);
+        Assert.AreEqual(text, ControlObjectOld.Text);
     }
 
     [TestMethod]
@@ -33,7 +33,7 @@ public class TextboxTests : TestBase<Textbox>
         SetTextValue(text);
 
         // Act
-        var result = ControlObject.Text;
+        var result = ControlObjectOld.Text;
 
         // Assert
         Assert.AreEqual(text, result);
@@ -49,10 +49,10 @@ public class TextboxTests : TestBase<Textbox>
         SetTextValue(oldText);
 
         // Act
-        ControlObject.Set(text);
+        ControlObjectOld.Set(text);
         
         // Assert
-        Assert.AreEqual(text, ControlObject.Text);
+        Assert.AreEqual(text, ControlObjectOld.Text);
     }
 
     private void SetTextValue(string text)
